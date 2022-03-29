@@ -5,9 +5,8 @@
 session_start();
 if(!isset($_SESSION['username'])){
     header("location: login.php");
-
-require "../koneksidb.php";
 }
+require "../koneksidb.php";
 
 ?>
 <head>
@@ -168,26 +167,13 @@ require "../koneksidb.php";
             <div class="product-tab-item-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12">
-                            <!-- Start Product Tab Items  -->
-                            <ul class="product-tab nav justify-content-center" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#sofa" type="button">Sofa <img src="assets/images/icons/product-tab-icon-6.svg" alt=""></button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#table" type="button">Table <img src="assets/images/icons/product-tab-icon-7.svg" alt=""></button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#bed" type="button">Bed <img src="assets/images/icons/product-tab-icon-8.svg" alt=""></button>
-                                </li>
-                            </ul>
-                            <!-- End Product Tab Items  -->
-                        </div>
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 limit 6"); ?>
+                        <?php while($perproduk = $ambil->fetch_assoc()){?>
                         <div class="col-12">
                             <!-- Start Tab Content Items -->
                             <div class="tab-content">
                                 <!-- Start Tab Content Single Item -->
-                                <div class="tab-pane show active tab-animate" id="sofa" role="tabpanel">
+                                <div class="tab-pane show active tab-animate" >
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="product-grid-items">
@@ -196,14 +182,14 @@ require "../koneksidb.php";
                                                         <!-- Start Product Single Item - Style 2 -->
                                                         <div class="product-single-item-style-2">
                                                             <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-1.webp" alt=""></a>
+                                                                <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
                                                                 <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
                                                             </div>
                                                             <div class="content">
                                                                 <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Puff Chair</a></h4>
-                                                                    <span class="price"><del>$287.00</del></span>
+                                                                    <span class="catagory">Album</span>
+                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
                                                                     <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
@@ -213,385 +199,6 @@ require "../koneksidb.php";
                                                         </div>
                                                         <!-- End Product Single Item - Style 2 -->
                                                     </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-2.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Upholstered chair</a></h4>
-                                                                    <span class="price">$399.00 <del>$450.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-3.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">Table</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">T-Table</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-4.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Bombi Chair</a></h4>
-                                                                    <span class="price"><del>$550.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-5.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Trestle-based chair</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-6.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">SHELF</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Wooden Bookshelf</a></h4>
-                                                                    <span class="price">$550.00 <del>$650.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Tab Content Single Item -->
-                                <!-- Start Tab Content Single Item -->
-                                <div class="tab-pane tab-animate" id="table" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="product-grid-items">
-                                                <div class="row mb-n25">
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-3.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">Table</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">T-Table</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-4.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Bombi Chair</a></h4>
-                                                                    <span class="price"><del>$550.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-1.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Puff Chair</a></h4>
-                                                                    <span class="price"><del>$287.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-5.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Trestle-based chair</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-2.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Upholstered chair</a></h4>
-                                                                    <span class="price">$399.00 <del>$450.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-6.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">SHELF</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Wooden Bookshelf</a></h4>
-                                                                    <span class="price">$550.00 <del>$650.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Tab Content Single Item -->
-                                <!-- Start Tab Content Single Item -->
-                                <div class="tab-pane tab-animate" id="bed" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="product-grid-items">
-                                                <div class="row mb-n25">
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-2.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Upholstered chair</a></h4>
-                                                                    <span class="price">$399.00 <del>$450.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-1.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Puff Chair</a></h4>
-                                                                    <span class="price"><del>$287.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-4.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Bombi Chair</a></h4>
-                                                                    <span class="price"><del>$550.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-3.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">Table</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">T-Table</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-6.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">SHELF</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Wooden Bookshelf</a></h4>
-                                                                    <span class="price">$550.00 <del>$650.00</del></span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                    <div class="col-xl-4 col-md-6 mb-25">
-                                                        <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
-                                                            <div class="image img-responsive">
-                                                                <a href="product-details-default.html"><img class="img-fluid" src="assets/images/products/default/product-default-style-2-img-5.webp" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="top">
-                                                                    <span class="catagory">CHAIR</span>
-                                                                    <h4 class="title"><a href="product-details-default.html">Trestle-based chair</a></h4>
-                                                                    <span class="price">$198.00</span>
-                                                                </div>
-                                                                <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
                                                         <!-- End Product Single Item - Style 2 -->
                                                     </div>
                                                 </div>
@@ -607,6 +214,7 @@ require "../koneksidb.php";
                                 <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
