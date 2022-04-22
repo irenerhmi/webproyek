@@ -76,7 +76,7 @@ require "../koneksidb.php";
                                             <div class="col-xl-7 col-md-8">
                                                 <div class="content-fluid">
                                                     <span class="title-tag"> </span>
-                                                    <h2 class="title">Belanja merchandise K-pop dengan <span class="text-mark">HaulHayul</span></h2>
+                                                    <h2 class="title">Belanja merchandise <br>K-pop dengan <span class="text-mark">HaulHayul</span></h2>
                                                     <p></p>
                                                     <a href="product-details-default.html" class="btn btn-lg btn-default">Shop Now</a>
                                                 </div>
@@ -140,6 +140,144 @@ require "../koneksidb.php";
     <!-- ...::: Strat Product Tab Item Section :::... -->
     <div class="product-tab-items-section section-fluid-270 section-top-gap-100">
         <div class="box-wrapper">
+            <div class="section-wrapper">
+                <div class="container-fluid">
+                    <div class="row justify-content-center flex-warp">
+                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7 col-10">
+                            <div class="section-content section-content-gap-60 text-center">
+                                <h2 class="section-title">Coming Soon</h2>
+                                <p>Produk yang akan segera hadir</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tab-item-wrapper">
+                <div class="container">
+                    <div class="row g-5">
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 AND status='PO' limit 6"); ?>
+                        <?php while($perproduk = $ambil->fetch_assoc()){?>
+                        <div class="col-4">
+                            <!-- Start Tab Content Items -->
+                            <div class="tab-content">
+                                <!-- Start Tab Content Single Item -->
+                                <div class="tab-pane show active tab-animate" >
+                                                        <!-- Start Product Single Item - Style 2 -->
+                                                        <div class="product-single-item-style-1">
+                                                            <div class="image img-responsive">
+                                                                <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
+                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="top">
+                                                                    <span class="catagory">Album</span>
+                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
+                                                                </div>
+                                                                <div class="bottom">
+                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- End Product Single Item - Style 2 -->
+                                                    </div>
+                                                        <!-- End Product Single Item - Style 2 -->
+                                </div>
+                                <!-- End Tab Content Single Item -->
+                            </div>
+                            <!-- End Tab Content Items -->
+                            <?php } ?>
+                            <div class="d-flex justify-content-center">
+                                <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ...::: End Product Tab Item Section :::... -->
+
+    <!-- ...::: Strat Product Tab Item Section :::... -->
+    <div class="product-tab-items-section section-fluid-270 section-top-gap-100">
+        <div class="box-wrapper">
+            <div class="section-wrapper d-none">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-lg-7 col-md-8 col-sm-10">
+                            <div class="section-content section-content-gap-60 text-center">
+                                <h2 class="section-title fw-normal">Hurry! <br> Get your <span class="fw-bold">product</span> now</h2>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="container-fluid">
+                    <div class="row justify-content-center flex-warp">
+                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7 col-10">
+                            <div class="section-content section-content-gap-60 text-center">
+                                <h2 class="section-title">Produk Ready Stock</h2>
+                                <p>Pilih Produk Favoritmu yang Sedang Ready Stock.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-tab-item-wrapper">
+                <div class="container">
+                    <div class="row g-5">
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 AND status LIKE 'Ready%' limit 6"); ?>
+                        <?php while($perproduk = $ambil->fetch_assoc()){?>
+                        <div class="col-4">
+                            <!-- Start Tab Content Items -->
+                            <div class="tab-content">
+                                <!-- Start Tab Content Single Item -->
+                                <div class="tab-pane show active tab-animate" >
+                                                        <!-- Start Product Single Item - Style 2 -->
+                                                        <div class="product-single-item-style-1">
+                                                            <div class="image img-responsive">
+                                                                <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
+                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="top">
+                                                                    <span class="catagory">Album</span>
+                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
+                                                                </div>
+                                                                <div class="bottom">
+                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- End Product Single Item - Style 2 -->
+                                                    </div>
+                                                        <!-- End Product Single Item - Style 2 -->
+                                </div>
+                                <!-- End Tab Content Single Item -->
+                            </div>
+                            <!-- End Tab Content Items -->
+                            <?php } ?>
+                            <div class="d-flex justify-content-center">
+                                <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ...::: End Product Tab Item Section :::... -->
+
+    <!-- ...::: Strat Product Tab Item Section :::... -->
+    <div class="product-tab-items-section section-fluid-270 section-top-gap-100">
+        <div class="box-wrapper">
             <div class="section-wrapper d-none">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
@@ -165,22 +303,17 @@ require "../koneksidb.php";
                 </div>
             </div>
             <div class="product-tab-item-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 limit 6"); ?>
+                <div class="container">
+                    <div class="row g-5">
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 AND status='PO' limit 6"); ?>
                         <?php while($perproduk = $ambil->fetch_assoc()){?>
-                        <div class="col-12">
+                        <div class="col-4">
                             <!-- Start Tab Content Items -->
                             <div class="tab-content">
                                 <!-- Start Tab Content Single Item -->
                                 <div class="tab-pane show active tab-animate" >
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="product-grid-items">
-                                                <div class="row mb-n25">
-                                                    <div class="col-xl-4 col-md-6 mb-25">
                                                         <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-2">
+                                                        <div class="product-single-item-style-1">
                                                             <div class="image img-responsive">
                                                                 <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
                                                                 <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
@@ -192,7 +325,7 @@ require "../koneksidb.php";
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
-                                                                    <a href="cart.html" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
                                                                 </div>
                                                             </div>
 
@@ -200,27 +333,22 @@ require "../koneksidb.php";
                                                         <!-- End Product Single Item - Style 2 -->
                                                     </div>
                                                         <!-- End Product Single Item - Style 2 -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!-- End Tab Content Single Item -->
                             </div>
                             <!-- End Tab Content Items -->
-
+                            <?php } ?>
                             <div class="d-flex justify-content-center">
                                 <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
                             </div>
                         </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- ...::: Strat Product Tab Item Section :::... -->
+    <!-- ...::: End Product Tab Item Section :::... -->
 
     <!-- ...::: Strat Banner Card Section Section :::... -->
     

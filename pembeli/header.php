@@ -344,7 +344,7 @@
                 </li>
             </ul>
             <div class="offcanvas-action-link">
-                <a href="cart.html" class="btn">Add Cart</a>
+                <a href="cart.php" class="btn">Add Cart</a>
                 <a href="checkout.html" class="btn">Checkout</a>
             </div>
         </div>
