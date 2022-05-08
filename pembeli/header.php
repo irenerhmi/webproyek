@@ -5,7 +5,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-auto">
                         <!-- Start Header Logo -->
-                        <a href="index.html" class="header-logo">
+                        <a href="index.php" class="header-logo">
                             <img class="img-fluid" src="assets/images/logo/logo-dark-theme.png" alt="">
                         </a>
                         <!-- End Header Logo -->
@@ -344,7 +344,7 @@
                 </li>
             </ul>
             <div class="offcanvas-action-link">
-                <a href="cart.php" class="btn">Add Cart</a>
+                <a href="cart.php" class="btn">Lihat Cart</a>
                 <a href="checkout.html" class="btn">Checkout</a>
             </div>
         </div>

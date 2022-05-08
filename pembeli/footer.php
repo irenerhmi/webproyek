@@ -7,8 +7,8 @@
                     <div class="footer-top">
                         <div class="footer-top-left">
                             <div class="footer-contact-items">
-                                <a class="icon-left" href="tel:+12345678910"><img class="icon-svg" src="assets/images/icons/icon-ios-call-dark.svg" alt="">+123 4567 8910</a>
-                                <a class="icon-left" href="mailto:demo@example.com"><img class="icon-svg" src="assets/images/icons/icon-mail-open-dark.svg" alt="">demo@example.com</a>
+                                <a class="icon-left" href="tel:+12345678910"><img class="icon-svg" src="assets/images/icons/icon-ios-call-dark.svg" alt="">+021-4724-9068</a>
+                                <a class="icon-left" href="mailto:demo@example.com"><img class="icon-svg" src="assets/images/icons/icon-mail-open-dark.svg" alt="">haulhallyu@gmail.com</a>
                             </div>
                         </div>
                         <div class="footer-top-right">
@@ -27,7 +27,18 @@
                         <div class="footer-widgets-items">
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Product</h5>
+                                <h5 class="title">Kategori</h5>
+                                <ul class="footer-nav">
+                                    <li><a href="contact.html">Album</a></li>
+                                    <li><a href="contact.html">Lightstick</a></li>
+                                    <li><a href="contact.html">Clothes</a></li>
+                                    <li><a href="contact.html">Unofficial Merchandise</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Widget Single Item -->
+                            <!-- Start Footer Widget Single Item -->
+                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
+                                <h5 class="title">News</h5>
                                 <ul class="footer-nav">
                                     <li><a href="#">Shop Vendor</a></li>
                                     <li><a href="#">Product House</a></li>
@@ -39,7 +50,7 @@
                             <!-- End Footer Widget Single Item -->
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Offer</h5>
+                                <h5 class="title">Profile</h5>
                                 <ul class="footer-nav">
                                     <li><a href="#">Shop Vendor</a></li>
                                     <li><a href="#">Product House</a></li>
@@ -51,19 +62,7 @@
                             <!-- End Footer Widget Single Item -->
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Information</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">Shop Vendor</a></li>
-                                    <li><a href="#">Product House</a></li>
-                                    <li><a href="#">Categories</a></li>
-                                    <li><a href="#">Delivery Areas</a></li>
-                                    <li><a href="#">Delivery Cost</a></li>
-                                </ul>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">About</h5>
+                                <h5 class="title">About Us</h5>
                                 <ul class="footer-nav">
                                     <li><a href="#">Shop Vendor</a></li>
                                     <li><a href="#">Product House</a></li>
@@ -82,59 +81,51 @@
                         <div class="footer-widgets-items">
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Product</h5>
+                                <h5 class="title">Kategori</h5>
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-1">Product</h5>
                                 <div id="dividerId-1" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
+                                        <li><a href="contact.html">Album</a></li>
+                                        <li><a href="contact.html">Lightstick</a></li>
+                                        <li><a href="contact.html">Clothes</a></li>
+                                        <li><a href="contact.html">Unofficial Merchandise</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <!-- End Footer Widget Single Item -->
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Offer</h5>
+                                <h5 class="title">News</h5>
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-2">Offer</h5>
                                 <div id="dividerId-2" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
+                                        <li><a href="contact.html">Informasi K-pop Group</a></li>
+                                        <li><a href="contact.html">Topik Terkini</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <!-- End Footer Widget Single Item -->
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Information</h5>
+                                <h5 class="title">Profile</h5>
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-3">Information</h5>
                                 <div id="dividerId-3" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
+                                        <li><a href="contact.html">My Profile</a></li>
+                                        <li><a href="contact.html">Riwayat Pesanan</a></li>
+                                        <li><a href="contact.html">Log Out</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <!-- End Footer Widget Single Item -->
                             <!-- Start Footer Widget Single Item -->
                             <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">About</h5>
+                                <h5 class="title">About Us</h5>
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-4">About</h5>
                                 <div id="dividerId-4" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
+                                        <li><a href="contact.html">About HaulHallyu</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
