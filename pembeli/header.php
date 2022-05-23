@@ -61,7 +61,15 @@
                     <div class="col-auto">
                         <div class="header-action">
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas"><img src="assets/images/icons/icon-heart-light.svg" alt=""><span class="count-tag">1</span></button>
-                            <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src="assets/images/icons/icon-shopping-bag-light.svg" alt=""><span class="item-count item-count--dark"></span></button>
+                            <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src="assets/images/icons/icon-shopping-bag-light.svg" alt=""><span class="count-tag">
+                                <?php
+                                    if(!empty($_SESSION["keranjang"])) {
+                                    $cart_count = count(array_keys($_SESSION["keranjang"]));
+                                    echo  $cart_count; 
+                                    }
+                                    else echo "0";
+                                    ?>
+                            </span></button>
                         </div>
                     </div>
                 </div>
@@ -290,62 +298,39 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <?php
+                    $total = 0;
+                    foreach ($_SESSION['keranjang'] as $id => $qty):
+                                        
+                    $ambil = $conn->query("SELECT * from produk WHERE id_produk='$id'");
+                    $pecah = $ambil->fetch_assoc();                                  
+                    $subtotal = $pecah['harga']*$qty;
+
+                    ?>
             <ul class="offcanvas-products-list">
                 <li class="single-item">
                     <div class="box">
                         <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-1.webp" alt="" class="offcanvas-wishlist-image">
+                            <img src="../image/penjual/<?= $pecah['image']; ?>" alt="" class="offcanvas-wishlist-image">
                         </a>
                         <div class="content">
-                            <a href="" class="title">Tops</a>
+                            <a href="" class="title"><?php echo $pecah['nama_produk']; ?></a>
                             <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$100.00</span>
+                                <span class="offcanvas-wishlist-item-details-quantity"><?php echo $qty; ?> x </span>
+                                <span class="offcanvas-wishlist-item-details-price"><?php echo $subtotal; ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-2.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Leggings</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$49.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-3.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Casual Shirt</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$65.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
+                        <a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
                     </div>
                 </li>
             </ul>
+            <?php $total+=$subtotal; ?>
+            <?php endforeach?> 
             <div class="offcanvas-action-link">
                 <a href="cart.php" class="btn">Lihat Cart</a>
-                <a href="checkout.html" class="btn">Checkout</a>
+                <a href="checkout.php" class="btn">Checkout</a>
             </div>
         </div>
     </div>

@@ -120,7 +120,7 @@ require "../koneksidb.php";
                                             <td class="product_remove"><a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a></td>
                                             <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['id_produk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
                                             <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama_produk']?></a></td>
-                                            <td class="product-price"><?php echo $pecah['harga']?></td>
+                                            <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td>
                                             <td class="product_quantity"><label><?= $qty; ?></label> <input type="hidden" class="iquantity" value="<?= $qty; ?>" type="number"></td>
                                             <td class="product_total">Rp. <?php echo number_format($subtotal); ?></td>
                                             <input class="product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>

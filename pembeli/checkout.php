@@ -42,6 +42,8 @@ require "../koneksidb.php";
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
 <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
@@ -278,13 +280,16 @@ require "../koneksidb.php";
                         $alamat = $row['u_alamat'];
                         $nomor = $row['u_nohp'];
                         ?>
-                        <form action="#">
+                        <form id="form" class="form" action="#" method="post">
                             <h3>Billing Details</h3>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="default-form-box">
                                         <label>Nama Lengkap <span>*</span></label>
-                                        <input type="text" value="<?php echo $nama; ?>">
+                                        <input type="text" id="name" value="">
+                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -309,6 +314,14 @@ require "../koneksidb.php";
                                     <div class="default-form-box">
                                         <label>Alamat </label>
                                         <input type="text" value="<?php echo $alamat; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="default-form-box">
+                                        <label>Provinsi </label>
+                                        <select class="form-control" name="provinsi">
+                                            
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -496,6 +509,7 @@ require "../koneksidb.php";
     <script src="assets/js/plugins/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/venobox.min.js"></script>
     <script src="assets/js/plugins/ajax-mail.js"></script>
+    <script src="../assets/js/jquery.js"></script>
 
     <!-- Minify Version -->
     <!-- <script src="assets/js/vendor/vendor.min.js"></script> -->
@@ -503,7 +517,29 @@ require "../koneksidb.php";
 
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
-    <!-- <script src="assets/js/main.min.js"></script> -->
+    <script>
+        $(document).ready(function(){
+          $.ajax({
+            type: 'post',
+            url: 'dataprovinsi.php',
+            success: function(hasil_provinsi){
+              $("select[name=provinsi]").html(hasil_provinsi);
+            }
+          });
+
+      $("select[name=nama_provinsi]").on("change", function(){
+            // Ambil id_provinsi ynag dipilih (dari atribut pribadi)
+            var id_provinsi_terpilih = $("option:selected", this).attr("id_provinsi");
+            $.ajax({
+              type: 'post',
+              url: 'datadistrik.php',
+              data: 'id_provinsi='+id_provinsi_terpilih,
+              success:function(hasil_distrik){
+                $("select[name=nama_distrik]").html(hasil_distrik);
+              }
+            })
+          });
+    </script>
 
 </body>
 
