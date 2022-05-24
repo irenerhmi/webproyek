@@ -120,10 +120,10 @@ require "../koneksidb.php";
                                             <td class="product_remove"><a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a></td>
                                             <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['id_produk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
                                             <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama_produk']?></a></td>
-                                            <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td>
-                                            <td class="product_quantity"><label><?= $qty; ?></label> <input type="hidden" class="iquantity" value="<?= $qty; ?>" type="number"></td>
+                                            <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
+                                            <td class="product_quantity"><label><?= $qty; ?></label> <input class="iquantity" value="<?= $qty; ?>" type="number" name="iquantity" min='1' max='10' onchange="subTotal()"></td>
                                             <td class="product_total">Rp. <?php echo number_format($subtotal); ?></td>
-                                            <input class="product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>
+                                            <input class="itotal product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>
                                         </tr> <!-- End Cart Single Item-->
                                     </tbody>
                                     <?php $total+=$subtotal; ?>
@@ -149,7 +149,8 @@ require "../koneksidb.php";
                                     <p class="cart_amount">Rp. <?php echo number_format($total); ?></p>
                                 </div>
                                 <div class="checkout_btn">
-                                    <a class="btn btn-sm btn-radius btn-default" href="checkout.php">Proceed to Checkout</a>
+                                    <p id="lalacoba">Misi</p>
+                                    <button type="button" onclick="cobaganti()" class="btn btn-sm btn-radius btn-default" href="">Proceed to Checkout</button>
                                 </div>
                                 <?php } 
                                 else { 
@@ -195,6 +196,24 @@ require "../koneksidb.php";
 
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
+    <script >
+        function cobaganti(){
+            document.getElementById("lalacoba").innerHTML = "Bisa";
+        }
+
+        function subTotal(){
+            document.getElementByClassName("iprice").innerHTML;
+            var iquantity = document.getElementByClassName("iquantity").innerHTML
+            var itotal = document.getElementByClassName("itotal").innerHTML
+
+            for (i =0;i<iprice.length;i++) {
+                //document.getElementByClassName("itotal").innerText=(iprice[i].value)*(iquantity[i].value);
+                document.getElementByClassName("itotal").innerText=(document.getElementByClassName("iquantity").value)*( document.getElementByClassName("itotal").value);
+            }
+
+
+        }
+    </script>
     <!-- <script src="assets/js/main.min.js"></script> -->
 
 </body>

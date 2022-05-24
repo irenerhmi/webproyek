@@ -41,8 +41,6 @@ require "../koneksidb.php";
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <script src="https://kit.fontawesome.com/5fd8a6de94.js" crossorigin="anonymous"></script>
-
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
 <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
@@ -167,18 +165,18 @@ require "../koneksidb.php";
                                                         <!-- Start Product Single Item - Style 2 -->
                                                         <div class="product-single-item-style-1">
                                                             <div class="image img-responsive">
-                                                                <a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
-                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="changeIcon(this)"></i></a>
-                                                                <p id="fav" onclick="favsuc()"></p>
+                                                                <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
+                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
                                                             </div>
                                                             <div class="content">
                                                                 <div class="top">
-                                                                    <span class="catagory">Album</span>
-                                                                    <h4 class="title"><a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="catagory">Album</-span>
+                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
-                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                    <a classonclick="addCart(<?php echo $perproduk['id_produk'];?>)" ><span id="countCart">add_shopping_cart</span></button>
+                                                                    <!--<a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>-->
                                                                     <span id="cartsucc" class="category"> </span>
                                                                 </div>
                                                             </div>
@@ -395,9 +393,17 @@ require "../koneksidb.php";
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/main.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="">
-        let changeIcon = function(icon) {
-            icon.classList.toggle('fa-solid fa-heart')
+        function countCart(){
+            $.ajax({
+                type: "GET",
+                url: "proses-cart.php",
+                datatype: "JSON",
+                success: function(response){
+                    console.log(response);
+                }
+            });
         }
     </script>
 

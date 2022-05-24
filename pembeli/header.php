@@ -41,9 +41,9 @@
                                         <div class="has-dropdown">
                                             <div class="menu-content">
                                                 <ul class="submenu">
-                                                    <li><a href="about.html">My Profile</a></li>
+                                                    <li><a href="my-account.php">My Profile</a></li>
                                                     <li><a href="faq.html">Riwayat Pesanan</a></li>
-                                                    <li><a href="error.html">Log Out</a></li>
+                                                    <li><a href="logout.php">Log Out</a></li>
                                                 </ul>
                                             </div>
                                         </div>

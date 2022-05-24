@@ -195,6 +195,16 @@ input, textarea {
           transform: translateY(0);
 }
 
+/*Icon Wishlist*/
+.wishlist{
+    background: transparent;
+    border: none;
+    margin: 87px;
+    font-size: 88px;
+    outline: none;
+    color: navy;
+}
+
 /*Scroll Top Top*/
 .scroll-to-top {
   -webkit-box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
