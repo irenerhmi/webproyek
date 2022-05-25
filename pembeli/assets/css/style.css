@@ -200,10 +200,13 @@ input, textarea {
     background: transparent;
     border: none;
     margin: 87px;
-    font-size: 88px;
+    font-size: 20px;
+    width: 16px;
+    height: 16px;
     outline: none;
     color: navy;
 }
+
 
 /*Scroll Top Top*/
 .scroll-to-top {

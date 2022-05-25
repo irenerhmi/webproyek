@@ -169,15 +169,30 @@ $id = $_GET['id'];
                                         <li class="fill"><span class="material-icons">star_half</span></li>
                                     </ul>
                                     <!--<Button onclick="Toggle1()" id="btnh1" class="btn"><i class="fas fa-heart"></i></Button>-->
-                                    
+                                    <form actiom="add-wish.php" method="POST">
+                                    <br>
+                                        <a onclick="Toggle1()" id="btnh1" ><i class="fa-regular fa-heart"> 
+                                        <span id="texwish" class="section-title">Masukkan ke Wishlist</span></i></a>
+                                        <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
+                                        <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
+                                    </form>
                                 </div>
-                                <br>
-                                <a onclick="Toggle1()" id="btnh1" class="wishlist"><i class="fa-solid fa-heart"> 
-                                </i></a>
-                                <p id="texwish" class="section-title">Masukkan ke Wishlist</p> 
+                                <br><span class="price">Rp. <?php echo number_format($thargapro); ?><del> Rp. 100.000</del></span>
+                                <br><span class="section-title">Stok: <?php echo $tstok; ?></span><br>
+                                <br><label class="product_quantity">Quantity: 1      </label><input type="hidden" name="qtypro" id="qtypro" value=1>
+                                <form actiom="add-cart.php" method="POST">
+                                    <br>
+                                    <input type="hidden" name="idpro" id="idpro" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="namapro" id="namapro" value="<?php echo $tnamapro; ?>"><br>
+                                    <!--<input type="button" id="btnh2"><i class="fa-solid fa-cart-shopping">
+                                        <span id="texwish2" class="section-title">test</span> 
+                                    </i></input>-->
+                                        <!--<input type="button" id="btnh2">Add to Cart-->
+                                    <a onclick="Toggle2()" id="btnh2" ><i class="fa-solid fa-shopping-cart"><span id="texwish" class="section-title"> Masukkan ke keranjang</span></i></a>
 
-                                <span class="price">Rp. <?php echo number_format($thargapro); ?></span>
+                                </form>
                             </div>
+
                             <!-- End Product Content -->
                         </div>
                     </div>
@@ -473,7 +488,7 @@ $id = $_GET['id'];
     <script src="assets/js/main.js"></script>
     <!-- <script src="assets/js/main.min.js"></script> -->
     <script>
-    //    First Like Button   
+    //    Wishlist Button   
        var btnvar1 = document.getElementById('btnh1');
 
        function Toggle1(){
@@ -487,6 +502,54 @@ $id = $_GET['id'];
                 }
        }
 
+    // Add Cart Button 
+        var btnvar2 = document.getElementById('btnh2');
+
+       function Toggle2(){
+                if (btnvar2.style.color =="red") {
+                    btnvar2.style.color = "navy"
+                    document.getElementById("texwish2").innerHTML = "Masukkan ke keranjang";
+                }
+                else{
+                    btnvar2.style.color = "red"
+                    document.getElementById("texwish2").innerHTML = "Berhasil dimasukkan ke keranjang!";
+                }
+       }
+
+       $(document).ready(function() {
+ 
+            $("#btnh2").click(function() {
+ 
+                var idPro = $("#idpro").val();
+                var namaPro = $("#namapro").val();
+                var qtyPro = $("#qtypro").val();
+                var message = $("#message").val();
+ 
+                if(idPro==''||namaPro==''||qtyPro=='') {
+                    alert("Please fill all fields.");
+                    return false;
+                }
+ 
+                $.ajax({
+                    type: "POST",
+                    url: "add-cart.php",
+                    data: {
+                        idPro: idPro,
+                        namaPro: namaPro,
+                        qtyPro: qtyPro
+                    },
+                    cache: false,
+                    success: function(data) {
+                        alert(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+                 
+            });
+ 
+        });
     </script>
     <script type="">
         function imageZoom(imgID, resultID) {

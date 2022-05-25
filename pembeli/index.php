@@ -178,8 +178,13 @@ require "../koneksidb.php";
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
-                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                    <span id="cartsucc" class="category"> </span>
+                                                                    <form actiom="add-cart.php" method="POST">
+                                                                        <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
+                                                                        <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <a id="btnh2" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                        <span id="cartsucc" class="category"> </span>
+                                                                    </form>
                                                                 </div>
                                                             </div>
 
@@ -399,6 +404,52 @@ require "../koneksidb.php";
         let changeIcon = function(icon) {
             icon.classList.toggle('fa-solid fa-heart')
         }
+
+        var btnvar2 = document.getElementById('btnh2');
+
+       function Toggle2(){
+                if (btnvar2.style.color =="red") {
+                    btnvar2.style.color = "navy"
+                }
+                else{
+                    btnvar2.style.color = "red";
+                }
+       }
+
+       $(document).ready(function() {
+ 
+            $("#btnh2").click(function() {
+ 
+                var idPro = $("#idpro").val();
+                var namaPro = $("#namapro").val();
+                var qtyPro = $("#qtypro").val();
+                var message = $("#message").val();
+ 
+                if(idPro==''||namaPro==''||qtyPro=='') {
+                    alert("Please fill all fields.");
+                    return false;
+                }
+ 
+                $.ajax({
+                    type: "POST",
+                    url: "add-cart.php",
+                    data: {
+                        idPro: idPro,
+                        namaPro: namaPro,
+                        qtyPro: qtyPro
+                    },
+                    cache: false,
+                    success: function(data) {
+                        alert(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
+                 
+            });
+ 
+        });
     </script>
 
 </body>

@@ -88,7 +88,11 @@ require "../koneksidb.php";
                             <div class="table_page table-responsive">
                                 <table>
                                     <!-- Start Cart Table Head -->
-                                    <?php if (isset($_SESSION['keranjang'])) { ?>
+                                <?php 
+                                $sqlcek = "SELECT * FROM keranjang";
+                                $hit = mysqli_query($conn, $sqlcek);
+                                $count = $hit->num_rows;
+                                if ($count>=1) { ?>
                                     <thead>
                                         <tr>
                                             <th class="product_remove">Delete</th>
@@ -108,26 +112,29 @@ require "../koneksidb.php";
                                         
                                             # code...
                                         $total = 0;
-                                        foreach ($_SESSION['keranjang'] as $id => $qty):
                                         
-                                        $ambil = $conn->query("SELECT * from produk WHERE id_produk='$id'");
-                                        $pecah = $ambil->fetch_assoc();                                  
-                                        $subtotal = $pecah['harga']*$qty;
-                                        
+                                        $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
+                                            from keranjang k
+                                            join produk p
+                                            WHERE k.id_produk=p.id_produk");
+                                        while($pecah = $ambil->fetch_assoc()){                                 
+                                            $subtotal = $pecah['harga']*$pecah['quantity'];
+                                    
                                     
                                         ?>      
                                         <tr>
                                             <td class="product_remove"><a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a></td>
-                                            <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['id_produk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
-                                            <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama_produk']?></a></td>
+                                            <td class="product_thumb"><a href="product-details.php?id=<?php echo $image;?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
+                                            <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama']?></a></td>
                                             <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
-                                            <td class="product_quantity"><label><?= $qty; ?></label> <input class="iquantity" value="<?= $qty; ?>" type="number" name="iquantity" min='1' max='10' onchange="subTotal()"></td>
+                                            <td class="product_quantity"><label><?php echo $pecah['quantity']; ?></label> <input class="iquantity" value="<?php echo $pecah['quantity']; ?>" type="hidden" name="iquantity"  onchange="subTotal()"></td>
                                             <td class="product_total">Rp. <?php echo number_format($subtotal); ?></td>
                                             <input class="itotal product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>
                                         </tr> <!-- End Cart Single Item-->
                                     </tbody>
-                                    <?php $total+=$subtotal; ?>
-                                    <?php endforeach?> 
+                                    <?php 
+                                    };
+                                    $total+=$subtotal; ?>
                                 </table>
                             </div>
                         </div>
@@ -149,16 +156,16 @@ require "../koneksidb.php";
                                     <p class="cart_amount">Rp. <?php echo number_format($total); ?></p>
                                 </div>
                                 <div class="checkout_btn">
-                                    <p id="lalacoba">Misi</p>
                                     <button type="button" onclick="cobaganti()" class="btn btn-sm btn-radius btn-default" href="">Proceed to Checkout</button>
                                 </div>
-                                <?php } 
-                                else { 
+                                <?php } else {
+                                  
                                 ?>
-                                    <!-- Start Cart Table -->
+                                    
                                    <div class="text-center m-5">
                                         <h5>Belum ada Barang</h5>
                                    </div>
+
                             <?php }?>
                             </div>
                         </div>

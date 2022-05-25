@@ -63,12 +63,10 @@
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas"><img src="assets/images/icons/icon-heart-light.svg" alt=""><span class="count-tag">1</span></button>
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src="assets/images/icons/icon-shopping-bag-light.svg" alt=""><span class="count-tag">
                                 <?php
-                                    if(!empty($_SESSION["keranjang"])) {
-                                    $cart_count = count(array_keys($_SESSION["keranjang"]));
-                                    echo  $cart_count; 
-                                    }
-                                    else echo "0";
-                                    ?>
+                                $sqlcek = "SELECT * FROM keranjang ";
+                                $hit = mysqli_query($conn, $sqlcek);
+                                $count = $hit->num_rows;
+                                echo $count;?>
                             </span></button>
                         </div>
                     </div>
