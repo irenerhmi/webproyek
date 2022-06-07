@@ -4,14 +4,15 @@ include "../koneksidb.php";
     $idproduk = mysqli_real_escape_string($conn, $_POST['idPro']);
     $namaproduk = mysqli_real_escape_string($conn, $_POST['namaPro']);
     $qtyproduk = mysqli_real_escape_string($conn, $_POST['qtyPro']);
+
     $sqlcek = "SELECT * FROM keranjang where id_produk = '".$idproduk."'";
     $hit = mysqli_query($conn, $sqlcek);
     $row = mysqli_fetch_array($hit);
     $count = $hit->num_rows;
-    $qtyup = $row['qty'];
     echo $count;
 
     if ($count>=1) {
+        $qtyup = $row['qty'];
     	$qtyup += 1;
     	$sqlup = "UPDATE keranjang SET qty= '".$qtyup."' WHERE id_produk = '".$idproduk."'";
     	if(mysqli_query($conn, $sqlup)) {

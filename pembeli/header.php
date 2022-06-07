@@ -66,7 +66,13 @@
                                 $sqlcek = "SELECT * FROM keranjang ";
                                 $hit = mysqli_query($conn, $sqlcek);
                                 $count = $hit->num_rows;
-                                echo $count;?>
+
+                                if ($count > 0) {
+                                    echo $count;
+                                } else {
+                                    echo "0";
+                                }
+                                ?>
                             </span></button>
                         </div>
                     </div>
@@ -298,13 +304,15 @@
         <div class="offcanvas-body">
             <?php
                     $total = 0;
-                    foreach ($_SESSION['keranjang'] as $id => $qty):
                                         
-                    $ambil = $conn->query("SELECT * from produk WHERE id_produk='$id'");
-                    $pecah = $ambil->fetch_assoc();                                  
-                    $subtotal = $pecah['harga']*$qty;
+                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
+                    from keranjang k
+                    join produk p
+                    WHERE k.id_produk=p.id_produk");      
+                while($pecah = $ambil->fetch_assoc()){                                  
+                    $subtotal = $pecah['harga']*$pecah['quantity'];
 
-                    ?>
+            ?>
             <ul class="offcanvas-products-list">
                 <li class="single-item">
                     <div class="box">
@@ -312,10 +320,10 @@
                             <img src="../image/penjual/<?= $pecah['image']; ?>" alt="" class="offcanvas-wishlist-image">
                         </a>
                         <div class="content">
-                            <a href="" class="title"><?php echo $pecah['nama_produk']; ?></a>
+                            <a href="" class="title"><?php echo $pecah['nama']; ?></a>
                             <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity"><?php echo $qty; ?> x </span>
-                                <span class="offcanvas-wishlist-item-details-price"><?php echo $subtotal; ?></span>
+                                <span class="offcanvas-wishlist-item-details-quantity"><?php echo $pecah['quantity']; ?> x </span>
+                                <span class="offcanvas-wishlist-item-details-price"><?php echo $pecah['harga']*$pecah['quantity']; ?></span>
                             </div>
                         </div>
                     </div>
@@ -325,7 +333,7 @@
                 </li>
             </ul>
             <?php $total+=$subtotal; ?>
-            <?php endforeach?> 
+            <?php }?> 
             <div class="offcanvas-action-link">
                 <a href="cart.php" class="btn">Lihat Cart</a>
                 <a href="checkout.php" class="btn">Checkout</a>

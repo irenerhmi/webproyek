@@ -182,8 +182,8 @@ require "../koneksidb.php";
                                                                         <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
                                                                         <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
                                                                         <input type="hidden" name="qtypro" id="qtypro" value=1><br>
-                                                                        <a id="btnh2" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
-                                                                        <span id="cartsucc" class="category"> </span>
+                                                                        <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
+                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -259,7 +259,13 @@ require "../koneksidb.php";
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
-                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                    <form actiom="add-cart.php" method="POST">
+                                                                        <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
+                                                                        <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
+                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
+                                                                    </form>
                                                                 </div>
                                                             </div>
 
@@ -334,7 +340,13 @@ require "../koneksidb.php";
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
-                                                                    <a href="beli.php?id=<?php echo $perproduk['id_produk'];?>&qty=1" class="event-btn"><span class="material-icons">add_shopping_cart</span></a>
+                                                                    <form actiom="add-cart.php" method="POST">
+                                                                        <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
+                                                                        <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
+                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
+                                                                    </form>
                                                                 </div>
                                                             </div>
 
@@ -416,40 +428,38 @@ require "../koneksidb.php";
                 }
        }
 
-       $(document).ready(function() {
+       function sukcart(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var qtyPro=document.getElementById('qtypro');   
+            var message=document.getElementById('message'); 
  
-            $("#btnh2").click(function() {
+            if(idPro==''||namaPro==''||qtyPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
  
-                var idPro = $("#idpro").val();
-                var namaPro = $("#namapro").val();
-                var qtyPro = $("#qtypro").val();
-                var message = $("#message").val();
- 
-                if(idPro==''||namaPro==''||qtyPro=='') {
-                    alert("Please fill all fields.");
-                    return false;
+            $.ajax({
+                type: "POST",
+                url: "add-cart.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    qtyPro: qtyPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
                 }
- 
-                $.ajax({
-                    type: "POST",
-                    url: "add-cart.php",
-                    data: {
-                        idPro: idPro,
-                        namaPro: namaPro,
-                        qtyPro: qtyPro
-                    },
-                    cache: false,
-                    success: function(data) {
-                        alert(data);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr);
-                    }
-                });
-                 
             });
+                 
+            
  
-        });
+        }
     </script>
 
 </body>

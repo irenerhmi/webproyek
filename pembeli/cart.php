@@ -113,28 +113,35 @@ require "../koneksidb.php";
                                             # code...
                                         $total = 0;
                                         
-                                        $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
+                                        $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
                                             from keranjang k
                                             join produk p
-                                            WHERE k.id_produk=p.id_produk");
+                                            WHERE k.id_produk=p.id_produk and k.c_flag=1");
                                         while($pecah = $ambil->fetch_assoc()){                                 
                                             $subtotal = $pecah['harga']*$pecah['quantity'];
                                     
                                     
-                                        ?>      
-                                        <tr>
-                                            <td class="product_remove"><a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a></td>
-                                            <td class="product_thumb"><a href="product-details.php?id=<?php echo $image;?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
-                                            <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama']?></a></td>
-                                            <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
-                                            <td class="product_quantity"><label><?php echo $pecah['quantity']; ?></label> <input class="iquantity" value="<?php echo $pecah['quantity']; ?>" type="hidden" name="iquantity"  onchange="subTotal()"></td>
-                                            <td class="product_total">Rp. <?php echo number_format($subtotal); ?></td>
-                                            <input class="itotal product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>
-                                        </tr> <!-- End Cart Single Item-->
+                                        ?> 
+                                        <form actiom="hapuscart.php" method="POST">   
+                                            <tr>
+                                                <td class="product_remove">
+                                                    <a onclick="delcart(<?php echo $pecah['produkidk']; ?>)">
+                                                        <img src="assets/images/icons/icon-trash.svg" alt="">
+                                                    </a>
+                                                </td>
+                                                <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['produkidk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
+                                                <td class="product_name"><a href="<?php echo $pecah['produkidk']?>"><?php echo $pecah['nama']?></a></td>
+                                                <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
+                                                <td class="product_quantity"><label><?php echo $pecah['quantity']; ?></label> <input class="iquantity" value="<?php echo $pecah['quantity']; ?>" type="hidden" name="iquantity"  onchange="subTotal()"></td>
+                                                <td class="product_total">Rp. <?php echo number_format($subtotal); ?></td>
+                                                <input class="itotal product_total" type="hidden" value="<?php echo $subtotal; ?>"></td>
+                                            </tr> <!-- End Cart Single Item-->
+                                        </form>
                                     </tbody>
                                     <?php 
+                                    $total+=$subtotal;
                                     };
-                                    $total+=$subtotal; ?>
+                                    ?>
                                 </table>
                             </div>
                         </div>
@@ -219,6 +226,34 @@ require "../koneksidb.php";
             }
 
 
+        }
+
+        function delcart(idnih) {
+
+            var idPro=idnih; 
+ 
+            if(idPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "hapuscart.php",
+                data: {
+                    idPro: idnih
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+                 
+            
+ 
         }
     </script>
     <!-- <script src="assets/js/main.min.js"></script> -->
