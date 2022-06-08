@@ -59,7 +59,7 @@ require "../koneksidb.php";
         <div class="box-wrapper">
             <div class="breadcrumb-wrapper breadcrumb-wrapper--style-1 pos-relative">
                 <div class="breadcrumb-bg">
-                    <img src="assets/images/breadcrumb/breadcrumb-img-product-details-page.webp" alt="">
+                    <img src="../assets/images/breadcrumb/headerlogin.jpg" width="1920px" height="500px" alt="">
                 </div>
                 <div class="breadcrumb-content section-fluid-270">
                     <div class="breadcrumb-wrapper">
@@ -89,7 +89,11 @@ require "../koneksidb.php";
                             <div class="table_page table-responsive">
                                 <table>
                                     <!-- Start Wishlist Table Head -->
-                                    <?php if (isset($_SESSION['favo'])) { ?>
+                                    <?php 
+                                    $sqlcek = "SELECT * FROM keranjang";
+                                    $hit = mysqli_query($conn, $sqlcek);
+                                    $count = $hit->num_rows;
+                                    if ($count>=1) {?>
                                     <thead>
                                         <tr>
                                             <th class="product_remove">Delete</th>
@@ -109,34 +113,46 @@ require "../koneksidb.php";
                                         
                                             # code...
                                         $total = 0;
-                                        foreach ($_SESSION['keranjang'] as $id => $qty):
+                                        $ambil = $conn->query("SELECT p.id_produk as produkid, w.qty as stokw, w.id_produk as produkidk, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, p.stok as stok
+                                            from wishlist w
+                                            join produk p
+                                            WHERE w.id_produk=p.id_produk and w.w_flag=1");
+                                            while($pecah = $ambil->fetch_assoc()){
+                                            
                                         
-                                        $ambil = $conn->query("SELECT * from produk WHERE id_produk='$id'");
-                                        $pecah = $ambil->fetch_assoc();                                  
-                                        $subtotal = $pecah['harga']*$qty;
-                                        
-                                    
-                                        ?>      
-                                        <tr>
-                                            <td class="product_remove"><a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a></td>
-                                            <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['id_produk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
-                                            <td class="product_name"><a href="<?php echo $pecah['id_produk']?>"><?php echo $pecah['nama_produk']?></a></td>
-                                            <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
-                                            <td class="product_quantity"><label><?= $qty; ?></label> <input class="iquantity" value="<?= $qty; ?>" type="hidden" name="iquantity"></td>
-                                            <td class="product_addcart"><a href="cart.html" class="btn btn-sm btn-radius btn-default">Add To Cart</a></td>
-                                        </tr> <!-- End Wishlist Single Item-->
-                                    </tbody>
-                                    <?php $total+=$subtotal; ?>
-                                    <?php endforeach?> 
+                                            ?> 
+                                            <tr>
+                                            <form actiom="add-wish.php" method="POST">
+                                                <td class="product_remove">
+                                                    <a onclick="delwish(<?php echo $pecah['produkidk']; ?>)">
+                                                        <img src="assets/images/icons/icon-trash.svg" alt="">
+                                                    </a>
+                                                </td>
+                                                <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['produkidk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
+                                                <td class="product_name"><a href="<?php echo $pecah['produkidk']?>"><?php echo $pecah['nama']?></a></td>
+                                                <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
+                                                <td class="product_stock"><?php echo $pecah['stokw']?></td>
+                                                <td class="product_addcart">
+                                                    <input type="hidden" name="idpro" id="idpro" value="<?php echo $pecah['id_produk']; ?>">
+                                                    <input type="hidden" name="namapro" id="namapro" value="<?php echo $pecah['nama_produk']; ?>">                                                    <input type="hidden" name="qtypro" id="qtypro" value=1>
+                                                    <a onclick="sukcart(<?php echo $pecah['produkidk']; ?>)" class="btn btn-sm btn-radius btn-default">Add To Cart</a>
+                                                </td>
+                                            </form>
+                                            </tr> 
+                                            <!-- End Wishlist Single Item-->
+                                        </tbody>
+                                        <?php 
+                                        }
+                                        ?> 
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php } 
-            else { 
-            ?>
+                                <?php } 
+                                else { 
+                                ?>
             <!-- Start Cart Table -->
             <div class="text-center m-5">
                 <h5>Belum ada Barang</h5>
@@ -146,160 +162,7 @@ require "../koneksidb.php";
     </div> <!-- ...:::: End Wishlist Section:::... -->
 
     <!-- ...::: Strat Footer Section - Footer Dark :::... -->
-    <footer class="footer-section footer-section-style-2 section-top-gap-120">
-        <div class="box-wrapper">
-            <div class="footer-wrapper section-fluid-270">
-                <div class="container-fluid">
-                    <!-- Start Footer Top  -->
-                    <div class="footer-top">
-                        <div class="footer-top-left">
-                            <div class="footer-contact-items">
-                                <a class="icon-left" href="tel:+12345678910"><img class="icon-svg" src="assets/images/icons/icon-ios-call-dark.svg" alt="">+123 4567 8910</a>
-                                <a class="icon-left" href="mailto:demo@example.com"><img class="icon-svg" src="assets/images/icons/icon-mail-open-dark.svg" alt="">demo@example.com</a>
-                            </div>
-                        </div>
-                        <div class="footer-top-right">
-                            <div class="footer-social">
-                                <a href="https://www.facebook.com/" target="_blank" rel="noopener"><img class="icon-svg" src="assets/images/icons/icon-facebook-f-dark.svg" alt=""></a>
-                                <a href="https://twitter.com/" target="_blank" rel="noopener"><img class="icon-svg" src="assets/images/icons/icon-twitter-dark.svg" alt=""></a>
-                                <a href="https://www.pinterest.com/" target="_blank" rel="noopener"><img class="icon-svg" src="assets/images/icons/icon-pinterest-p-dark.svg" alt=""></a>
-                                <a href="https://dribbble.com/" target="_blank" rel="noopener"><img class="icon-svg" src="assets/images/icons/icon-dribbble-dark.svg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Footer Top  -->
-
-                    <!-- Start Footer Center  -->
-                    <div class="footer-center d-none">
-                        <div class="footer-widgets-items">
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Product</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">Shop Vendor</a></li>
-                                    <li><a href="#">Product House</a></li>
-                                    <li><a href="#">Categories</a></li>
-                                    <li><a href="#">Delivery Areas</a></li>
-                                    <li><a href="#">Delivery Cost</a></li>
-                                </ul>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Offer</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">Shop Vendor</a></li>
-                                    <li><a href="#">Product House</a></li>
-                                    <li><a href="#">Categories</a></li>
-                                    <li><a href="#">Delivery Areas</a></li>
-                                    <li><a href="#">Delivery Cost</a></li>
-                                </ul>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Information</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">Shop Vendor</a></li>
-                                    <li><a href="#">Product House</a></li>
-                                    <li><a href="#">Categories</a></li>
-                                    <li><a href="#">Delivery Areas</a></li>
-                                    <li><a href="#">Delivery Cost</a></li>
-                                </ul>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">About</h5>
-                                <ul class="footer-nav">
-                                    <li><a href="#">Shop Vendor</a></li>
-                                    <li><a href="#">Product House</a></li>
-                                    <li><a href="#">Categories</a></li>
-                                    <li><a href="#">Delivery Areas</a></li>
-                                    <li><a href="#">Delivery Cost</a></li>
-                                </ul>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                        </div>
-                    </div>
-                    <!-- End Footer Center  -->
-
-                    <!-- Start Footer Center  -->
-                    <div class="footer-center">
-                        <div class="footer-widgets-items">
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Product</h5>
-                                <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-1">Product</h5>
-                                <div id="dividerId-1" class="widget-collapse-body collapse">
-                                    <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Offer</h5>
-                                <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-2">Offer</h5>
-                                <div id="dividerId-2" class="widget-collapse-body collapse">
-                                    <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">Information</h5>
-                                <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-3">Information</h5>
-                                <div id="dividerId-3" class="widget-collapse-body collapse">
-                                    <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                        <li><a href="contact.html">Delivery Cost</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                            <!-- Start Footer Widget Single Item -->
-                            <div class="footer-widgets-single-item footer-widgets-single-item--dark">
-                                <h5 class="title">About</h5>
-                                <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-4">About</h5>
-                                <div id="dividerId-4" class="widget-collapse-body collapse">
-                                    <ul class="footer-nav">
-                                        <li><a href="contact.html">Shop Vendor</a></li>
-                                        <li><a href="contact.html">Product House</a></li>
-                                        <li><a href="contact.html">Categories</a></li>
-                                        <li><a href="contact.html">Delivery Areas</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- End Footer Widget Single Item -->
-                        </div>
-                    </div>
-                    <!-- End Footer Center  -->
-
-                    <!-- Start Footer Bottom -->
-                    <div class="footer-bottom">
-                        <p class="copyright-text copyright-text--dark">&copy; 2021 Mart Up. Made with <span class="material-icons">favorite</span> by <a href="https://hasthemes.com/" target="_blank" rel="noopener noreferrer">Codecarnival</a></p>
-                        <a href="#" class="payment-logo"><img class="img-fluid" src="assets/images/company-logo/payment-logo.png" alt=""></a>
-                    </div>
-                    <!-- End Footer Bottom -->
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php require "footer.php"; ?>
     <!-- ...::: End Footer Section Section - Footer Dark :::... -->
 
     <!-- Scroll To button -->
@@ -327,8 +190,70 @@ require "../koneksidb.php";
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <!-- <script src="assets/js/main.min.js"></script> -->
-    <script type="text/javascript">
-        
+    <script>
+        function delwish(idnih) {
+
+            var idPro=idnih; 
+ 
+            if(idPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "hapuswish.php",
+                data: {
+                    idPro: idnih
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+                 
+        location.reload();
+ 
+        }
+
+        function sukcart(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var qtyPro=document.getElementById('qtypro');   
+            var message=document.getElementById('message'); 
+ 
+            if(idPro==''||namaPro==''||qtyPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-cart.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    qtyPro: qtyPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+
+            });
+
+        location.reload();
+                 
+            
+ 
+        }
     </script>
 
 </body>

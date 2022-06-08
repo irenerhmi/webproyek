@@ -252,7 +252,7 @@ require "../koneksidb.php";
                 }
             });
                  
-            
+        location.reload();  
  
         }
     </script>

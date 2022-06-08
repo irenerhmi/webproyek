@@ -159,7 +159,10 @@ $id = $_GET['id'];
                         <div class="col-xxl-4 col-lg-6">
                             <!-- Start Product Content -->
                             <div class="product-content">
+                                <form actiom="add-wish.php" method="POST">
+                                <span class="catagory">Album</span>
                                 <h2 class="title"><?php echo $tnamapro; ?></h2>
+                                <span class="author">Design: kakakoli Fashion</span>
                                 <div class="bottom">
                                     <ul class="review-star">
                                         <li class="fill"><span class="material-icons">star</span></li>
@@ -168,15 +171,14 @@ $id = $_GET['id'];
                                         <li class="fill"><span class="material-icons">star</span></li>
                                         <li class="fill"><span class="material-icons">star_half</span></li>
                                     </ul>
+
                                     <!--<Button onclick="Toggle1()" id="btnh1" class="btn"><i class="fas fa-heart"></i></Button>-->
-                                    <form actiom="add-wish.php" method="POST">
-                                    <br>
-                                        <a onclick="Toggle1()" id="btnh1" ><i class="fa-regular fa-heart"> 
-                                        <span id="texwish" class="section-title">Masukkan ke Wishlist</span></i></a>
-                                        <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
-                                        <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
-                                    </form>
                                 </div>
+                                <a class="wishlist" onclick="Toggle1()" id="btnh1" ><i class="fa-regular fa-heart"> 
+                                <span id="texwish" class="section-title">Masukkan ke Wishlist</span></i></a>
+                                <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
+                                <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
+                                </form>
                                 <br><span class="price">Rp. <?php echo number_format($thargapro); ?><del> Rp. 100.000</del></span>
                                 <br><span class="section-title">Stok: <?php echo $tstok; ?></span><br>
                                 <br><label class="product_quantity">Quantity: 1      </label><input type="hidden" name="qtypro" id="qtypro" value=1>

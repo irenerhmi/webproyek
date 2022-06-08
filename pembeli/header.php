@@ -60,10 +60,22 @@
                     </div>
                     <div class="col-auto">
                         <div class="header-action">
-                            <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas"><img src="assets/images/icons/icon-heart-light.svg" alt=""><span class="count-tag">1</span></button>
+                            <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas"><img src="assets/images/icons/icon-heart-light.svg" alt=""><span class="count-tag">
+                                <?php
+                                $sqlcek1 = "SELECT * FROM wishlist where w_flag = 1";
+                                $hit1 = mysqli_query($conn, $sqlcek1);
+                                $countw = $hit1->num_rows;
+
+                                if ($countw > 0) {
+                                    echo $countw;
+                                } else {
+                                    echo "0";
+                                }
+                                ?>
+                            </span></button>
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src="assets/images/icons/icon-shopping-bag-light.svg" alt=""><span class="count-tag">
                                 <?php
-                                $sqlcek = "SELECT * FROM keranjang ";
+                                $sqlcek = "SELECT * FROM keranjang where c_flag = 1";
                                 $hit = mysqli_query($conn, $sqlcek);
                                 $count = $hit->num_rows;
 
@@ -235,61 +247,38 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <?php
+                    $total = 0;
+                                        
+                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, w.w_flag as flag
+                    from wishlist w
+                    join produk p
+                    WHERE w.w_flag=1 AND w.id_produk=p.id_produk");      
+                while($pecah = $ambil->fetch_assoc()){
+
+            ?>
+            <br>
             <ul class="offcanvas-products-list">
                 <li class="single-item">
                     <div class="box">
                         <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-1.webp" alt="" class="offcanvas-wishlist-image">
+                            <img src="../image/penjual/<?= $pecah['image']; ?>" alt="" class="offcanvas-wishlist-image">
                         </a>
                         <div class="content">
-                            <a href="" class="title">Tops</a>
+                            <a href="" class="title"><?php echo $pecah['nama']; ?></a>
                             <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$100.00</span>
+                                <span class="offcanvas-wishlist-item-details-quantity"><?php echo $pecah['quantity']; ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-2.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Leggings</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$49.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-3.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Casual Shirt</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$65.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
+                        <a href="hapuswish.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
                     </div>
                 </li>
             </ul>
+            <?php }?> 
             <div class="offcanvas-action-link">
-                <a href="wishlist.html" class="btn">View wishlist</a>
+                <a href="wishlist.php" class="btn">View wishlist</a>
             </div>
         </div>
     </div>
@@ -305,14 +294,15 @@
             <?php
                     $total = 0;
                                         
-                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
+                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.c_flag as flag
                     from keranjang k
                     join produk p
-                    WHERE k.id_produk=p.id_produk");      
+                    WHERE k.c_flag=1 AND k.id_produk=p.id_produk");      
                 while($pecah = $ambil->fetch_assoc()){                                  
                     $subtotal = $pecah['harga']*$pecah['quantity'];
 
             ?>
+            <br>
             <ul class="offcanvas-products-list">
                 <li class="single-item">
                     <div class="box">

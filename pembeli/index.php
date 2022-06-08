@@ -165,15 +165,29 @@ require "../koneksidb.php";
                                 <!-- Start Tab Content Single Item -->
                                 <div class="tab-pane show active tab-animate" >
                                                         <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-1">
+                                                        <div class="product-single-item-style-2">
                                                             <div class="image img-responsive">
                                                                 <a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
-                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="changeIcon(this)"></i></a>
+                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="sukwish(<?php echo $perproduk['id_produk']; ?>)"></i></a>
                                                                 <p id="fav" onclick="favsuc()"></p>
                                                             </div>
                                                             <div class="content">
                                                                 <div class="top">
-                                                                    <span class="catagory">Album</span>
+                                                                    <span class="catagory">
+                                                                        <?php
+                                                                        $kat = $perproduk['id_kategori'];
+
+                                                                        if ($kat == 1) {
+                                                                            echo 'Album';
+                                                                        } else if ($kat == 2){
+                                                                            echo 'Lightstick';
+                                                                        } else if ($kat == 3){
+                                                                            echo 'Clothes';
+                                                                        } else if ($kat == 4){
+                                                                            echo 'Unofficial Merchandise';
+                                                                        }  
+                                                                        ?>
+                                                                    </span>
                                                                     <h4 class="title"><a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><?php echo $perproduk['nama_produk'] ?></a></h4>
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
@@ -181,10 +195,19 @@ require "../koneksidb.php";
                                                                     <form actiom="add-cart.php" method="POST">
                                                                         <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
                                                                         <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
-                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1>
+                                                                        <input type="hidden" name="stokpro" id="stokpro" value="<?php 
+                                                                        $stok = $perproduk['stok'];
+
+                                                                        if($stok>0){
+                                                                            echo "Produk Tersedia";
+                                                                        } else if($stok==0){
+                                                                            echo "Produk Habis";
+                                                                        }
+                                                                        ?>">
+                                                                        <br>
                                                                         <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
-                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
-                                                                    </form>
+                                                                    </form>                  
                                                                 </div>
                                                             </div>
 
@@ -247,24 +270,46 @@ require "../koneksidb.php";
                                 <!-- Start Tab Content Single Item -->
                                 <div class="tab-pane show active tab-animate" >
                                                         <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-1">
+                                                        <div class="product-single-item-style-2">
                                                             <div class="image img-responsive">
                                                                 <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
+                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="sukwish(<?php echo $perproduk['id_produk']; ?>)"></i></a>
                                                             </div>
                                                             <div class="content">
                                                                 <div class="top">
-                                                                    <span class="catagory">Album</span>
-                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="catagory">
+                                                                    <?php
+                                                                        $kat = $perproduk['id_kategori'];
+
+                                                                        if ($kat == 1) {
+                                                                            echo 'Album';
+                                                                        } else if ($kat == 2){
+                                                                            echo 'Lightstick';
+                                                                        } else if ($kat == 3){
+                                                                            echo 'Clothes';
+                                                                        } else if ($kat == 4){
+                                                                            echo 'Unofficial Merchandise';
+                                                                        }  
+                                                                    ?>
+                                                                    </span>
+                                                                    <h4 class="title"><a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><?php echo $perproduk['nama_produk'] ?></a></h4>
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
                                                                     <form actiom="add-cart.php" method="POST">
                                                                         <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
                                                                         <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
-                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><input type="hidden" name="stokpro" id="stokpro" value="<?php 
+                                                                        $stok = $perproduk['stok'];
+
+                                                                        if($stok>0){
+                                                                            echo "Produk Tersedia";
+                                                                        } else if($stok==0){
+                                                                            echo "Produk Habis";
+                                                                        }
+                                                                        ?>">
+                                                                        <br>
                                                                         <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
-                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -328,24 +373,46 @@ require "../koneksidb.php";
                                 <!-- Start Tab Content Single Item -->
                                 <div class="tab-pane show active tab-animate" >
                                                         <!-- Start Product Single Item - Style 2 -->
-                                                        <div class="product-single-item-style-1">
+                                                        <div class="product-single-item-style-2">
                                                             <div class="image img-responsive">
                                                                 <a href="product-details-default.html"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
-                                                                <a href="wishlist.html" class="event-btn"><span class="material-icons">favorite_border</span></a>
+                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="sukwish(<?php echo $perproduk['id_produk']; ?>)"></i></a>
                                                             </div>
                                                             <div class="content">
                                                                 <div class="top">
-                                                                    <span class="catagory">Album</span>
-                                                                    <h4 class="title"><a href="product-details-default.html"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="catagory">
+                                                                    <?php
+                                                                        $kat = $perproduk['id_kategori'];
+
+                                                                        if ($kat == 1) {
+                                                                            echo 'Album';
+                                                                        } else if ($kat == 2){
+                                                                            echo 'Lightstick';
+                                                                        } else if ($kat == 3){
+                                                                            echo 'Clothes';
+                                                                        } else if ($kat == 4){
+                                                                            echo 'Unofficial Merchandise';
+                                                                        }  
+                                                                    ?>
+                                                                    </span>
+                                                                    <h4 class="title"><a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><?php echo $perproduk['nama_produk'] ?></a></h4>
                                                                     <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
                                                                 </div>
                                                                 <div class="bottom">
                                                                     <form actiom="add-cart.php" method="POST">
                                                                         <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
                                                                         <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
-                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1><input type="hidden" name="stokpro" id="stokpro" value="<?php 
+                                                                        $stok = $perproduk['stok'];
+
+                                                                        if($stok>0){
+                                                                            echo "Produk Tersedia";
+                                                                        } else if($stok==0){
+                                                                            echo "Produk Habis";
+                                                                        }
+                                                                        ?>">
+                                                                        <br>
                                                                         <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
-                                                                        <a id="cartsucc" value="<?php echo $perproduk['id_produk']; ?>"class="category"> </a>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -428,7 +495,7 @@ require "../koneksidb.php";
                 }
        }
 
-       function sukcart(idnih) {
+        function sukcart(idnih) {
 
             var idPro=idnih; 
             var namaPro=document.getElementById('namapro');  
@@ -457,7 +524,40 @@ require "../koneksidb.php";
                 }
             });
                  
-            
+        location.reload();
+ 
+        }
+
+        function sukwish(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var stokPro=document.getElementById('stokpro');   
+            var message=document.getElementById('message'); 
+ 
+            if(idPro==''||namaPro==''||stokPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-wish.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    stokPro: stokPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+                 
+        location.reload(); 
  
         }
     </script>
