@@ -159,10 +159,9 @@ $id = $_GET['id'];
                         <div class="col-xxl-4 col-lg-6">
                             <!-- Start Product Content -->
                             <div class="product-content">
-                                <form actiom="add-wish.php" method="POST">
                                 <span class="catagory">Album</span>
                                 <h2 class="title"><?php echo $tnamapro; ?></h2>
-                                <span class="author">Design: kakakoli Fashion</span>
+                                <form actiom="add-wish.php" method="POST">
                                 <div class="bottom">
                                     <ul class="review-star">
                                         <li class="fill"><span class="material-icons">star</span></li>
@@ -171,17 +170,41 @@ $id = $_GET['id'];
                                         <li class="fill"><span class="material-icons">star</span></li>
                                         <li class="fill"><span class="material-icons">star_half</span></li>
                                     </ul>
-
+                                    <a class="fa-regular fa-heart" onclick="sukwish(<?php echo $tid; ?>)"> Masukkan ke Wishlist</i></a>
                                     <!--<Button onclick="Toggle1()" id="btnh1" class="btn"><i class="fas fa-heart"></i></Button>-->
+                                    
                                 </div>
-                                <a class="wishlist" onclick="Toggle1()" id="btnh1" ><i class="fa-regular fa-heart"> 
-                                <span id="texwish" class="section-title">Masukkan ke Wishlist</span></i></a>
-                                <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
-                                <input type="hidden" name="nama" value="<?php echo $tnamapro; ?>">
+                                <br><span class="price">Rp. <?php echo number_format($thargapro); ?><del></del><br></span>
                                 </form>
-                                <br><span class="price">Rp. <?php echo number_format($thargapro); ?><del> Rp. 100.000</del></span>
-                                <br><span class="section-title">Stok: <?php echo $tstok; ?></span><br>
-                                <br><label class="product_quantity">Quantity: 1      </label><input type="hidden" name="qtypro" id="qtypro" value=1>
+                                <div class="product-variables">
+                                    <!-- Start Product Single Variable -->
+                                    <div class="product-variable-color">
+                                        <h6 class="title">Stock: <?php echo $tstok; ?> pcs</h6><br>
+                                    </div>
+                                    <!-- End Product Single Variable -->
+
+                                    <form actiom="add-cart.php" method="POST">
+                                    <ul class="variable-items">
+                                        <li class="variable-single-items">
+                                            <a onclick="sukcart(<?php echo $tid; ?>)" class="btn btn-sm btn-default">Add To Cart</a>
+                                            <input type="hidden" name="idpro" id="idpro" value="<?php echo $tid; ?>">
+                                            <input type="hidden" name="namapro" id="namapro" value="<?php echo $tnamapro; ?>"><br>
+                                            <input type="hidden" name="qtypro" id="qtypro" value=1>
+                                            <input type="hidden" name="stokpro" id="stokpro" value="
+                                            <?php 
+
+                                                if($stok>0){
+                                                    echo "Produk Tersedia";
+                                                } else if($stok==0){
+                                                    echo "Produk Habis";
+                                                }
+                                                ?>
+                                            ">
+                                            <br>
+                                        </li>
+                                    </ul>
+                                    </form>
+                                </div>
                                 <form actiom="add-cart.php" method="POST">
                                     <br>
                                     <input type="hidden" name="idpro" id="idpro" value="<?php echo $id; ?>">
@@ -190,7 +213,6 @@ $id = $_GET['id'];
                                         <span id="texwish2" class="section-title">test</span> 
                                     </i></input>-->
                                         <!--<input type="button" id="btnh2">Add to Cart-->
-                                    <a onclick="Toggle2()" id="btnh2" ><i class="fa-solid fa-shopping-cart"><span id="texwish" class="section-title"> Masukkan ke keranjang</span></i></a>
 
                                 </form>
                             </div>
@@ -248,210 +270,77 @@ $id = $_GET['id'];
                         <div class="col-auto">
                             <div class="top-slider-buttons">
                                 <!-- If we need navigation buttons -->
-                                <div class="slider-buttons">
-                                    <div class="slider-button button-prev"><span class="material-icons">arrow_left</span></div>
-                                    <div class="slider-button button-next"><span class="material-icons">arrow_right</span></div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="product-item-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- Slider main container -->
-                            <div class="product-slider-3grids-1row">
-                                <div class="swiper-container">
-                                    <!-- Additional required wrapper -->
-                                    <div class="swiper-wrapper">
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-5.webp" alt="">
-                                                <ul class="tooltip-tag-items">
-                                                    <li class="color-yellow">15%</li>
-                                                </ul>
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">WOMEN</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Star Women pants</a></h4>
-                                                    <span class="price">$200.00 <del>$300.00</del></span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
+                <div class="swiper-container">
+                    <div class="row g-5">
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 AND status='PO' limit 3"); ?>
+                        <?php while($perproduk = $ambil->fetch_assoc()){?>
+                        <div class="col-4">
+                            <!-- Start Tab Content Items -->
+                            <div class="tab-content">
+                                <!-- Start Tab Content Single Item -->
+                                <div class="tab-pane show active tab-animate" >
+                                                        <!-- Start Product Single Item - Style 2 -->
+                                                        <div class="product-single-item-style-2">
+                                                            <div class="image img-responsive">
+                                                                <a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><img class="img-fluid" src="../image/penjual/<?php echo $perproduk['image'] ?>" alt=""></a>
+                                                                <a  class="event-btn"><i id="menu-icon" class="fa-regular fa-heart" onclick="sukwish(<?php echo $perproduk['id_produk']; ?>)"></i></a>
+                                                                <p id="fav" onclick="favsuc()"></p>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="top">
+                                                                    <span class="catagory">
+                                                                        <?php
+                                                                        $kat = $perproduk['id_kategori'];
+
+                                                                        if ($kat == 1) {
+                                                                            echo 'Album';
+                                                                        } else if ($kat == 2){
+                                                                            echo 'Lightstick';
+                                                                        } else if ($kat == 3){
+                                                                            echo 'Clothes';
+                                                                        } else if ($kat == 4){
+                                                                            echo 'Unofficial Merchandise';
+                                                                        }  
+                                                                        ?>
+                                                                    </span>
+                                                                    <h4 class="title"><a href="product-details.php?id=<?php echo $perproduk['id_produk'];?>"><?php echo $perproduk['nama_produk'] ?></a></h4>
+                                                                    <span class="price">Rp <?php echo number_format($perproduk['harga']) ?></span>
+                                                                </div>
+                                                                <div class="bottom">
+                                                                    <form method="POST">
+                                                                        <input type="hidden" name="idpro" id="idpro" value="<?php echo $perproduk['id_produk']; ?>">
+                                                                        <input type="hidden" name="namapro" id="namapro" value="<?php echo $perproduk['nama_produk']; ?>"><br>
+                                                                        <input type="hidden" name="qtypro" id="qtypro" value=1>
+                                                                        <input type="hidden" name="stokpro" id="stokpro" value="<?php 
+                                                                        $stok = $perproduk['stok'];
+
+                                                                        if($stok>0){
+                                                                            echo "Produk Tersedia";
+                                                                        } else if($stok==0){
+                                                                            echo "Produk Habis";
+                                                                        }
+                                                                        ?>">
+                                                                        <br>
+                                                                        <a class="event-btn" onclick="sukcart(<?php echo $perproduk['id_produk']; ?>)"><span class="material-icons">add_shopping_cart</span></a>
+                                                                    </form>                  
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- End Product Single Item - Style 2 -->
                                                     </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-4.webp" alt="">
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">WOMEN</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Slightly jackets XL Cool </a></h4>
-                                                    <span class="price">$350.00</span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-6.webp" alt="">
-                                                <ul class="tooltip-tag-items">
-                                                    <li class="color-green">15%</li>
-                                                </ul>
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">Bag</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Distracted XL bag</a></h4>
-                                                    <span class="price">$1200.00 <del>$1500.00</del></span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-1.webp" alt="">
-                                                <ul class="tooltip-tag-items">
-                                                    <li class="color-green">15%</li>
-                                                </ul>
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">MEN</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Man's Outdoor Shirt</a></h4>
-                                                    <span class="price">$355.00 <del>$400.00</del></span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-2.webp" alt="">
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">WOMEN</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Women Summer deal</a></h4>
-                                                    <span class="price">$550.00</span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                        <!-- Start Product Single Item - Style 1 -->
-                                        <div class="product-single-item-style-1 swiper-slide">
-                                            <a href="product-details-default.html" class="image img-responsive">
-                                                <img class="img-fluid" src="assets/images/products/default/product-default-style-1-img-3.webp" alt="">
-                                            </a>
-                                            <div class="content">
-                                                <div class="top">
-                                                    <span class="catagory">WOMEN</span>
-                                                    <h4 class="title"><a href="product-details-default.html">Women Luxury Party</a></h4>
-                                                    <span class="price">$1050.00</span>
-                                                </div>
-                                                <div class="bottom">
-                                                    <ul class="review-star">
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star</span></li>
-                                                        <li class="fill"><span class="material-icons">star_half</span></li>
-                                                    </ul>
-                                                    <div class="product-event-items">
-                                                        <a href="cart.html" class="btn cart-btn">Add to cart</a>
-                                                        <a href="wishlist.html" class="btn wishlist-btn"><span class="material-icons">favorite_border</span></a>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!-- End Product Single Item - Style 1 -->
-                                    </div>
+                                                        <!-- End Product Single Item - Style 2 -->
                                 </div>
+                                <!-- End Tab Content Single Item -->
                             </div>
+                            <!-- End Tab Content Items -->
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -489,6 +378,73 @@ $id = $_GET['id'];
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <!-- <script src="assets/js/main.min.js"></script> -->
+    <script type="">
+        function sukcart(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var qtyPro=document.getElementById('qtypro');   
+            var message=document.getElementById('message'); 
+ 
+            if(idPro==''||namaPro==''||qtyPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-cart.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    qtyPro: qtyPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+                 
+        location.reload();
+ 
+        }
+
+        function sukwish(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var stokPro=document.getElementById('stokpro');   
+            var message=document.getElementById('message'); 
+ 
+            if(idPro==''||namaPro==''||stokPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-wish.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    stokPro: stokPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+            });
+                 
+        location.reload(); 
+ 
+        }
+    </script>
     <script>
     //    Wishlist Button   
        var btnvar1 = document.getElementById('btnh1');
@@ -552,63 +508,6 @@ $id = $_GET['id'];
             });
  
         });
-    </script>
-    <script type="">
-        function imageZoom(imgID, resultID) {
-          var img, lens, result, cx, cy;
-          img = document.getElementById(imgID);
-          result = document.getElementById(resultID);
-          /*create lens:*/
-          lens = document.createElement("DIV");
-          lens.setAttribute("class", "img-zoom-lens");
-          /*insert lens:*/
-          img.parentElement.insertBefore(lens, img);
-          /*calculate the ratio between result DIV and lens:*/
-          cx = result.offsetWidth / lens.offsetWidth;
-          cy = result.offsetHeight / lens.offsetHeight;
-          /*set background properties for the result DIV:*/
-          result.style.backgroundImage = "url('" + img.src + "')";
-          result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
-          /*execute a function when someone moves the cursor over the image, or the lens:*/
-          lens.addEventListener("mousemove", moveLens);
-          img.addEventListener("mousemove", moveLens);
-          /*and also for touch screens:*/
-          lens.addEventListener("touchmove", moveLens);
-          img.addEventListener("touchmove", moveLens);
-          function moveLens(e) {
-            var pos, x, y;
-            /*prevent any other actions that may occur when moving over the image:*/
-            e.preventDefault();
-            /*get the cursor's x and y positions:*/
-            pos = getCursorPos(e);
-            /*calculate the position of the lens:*/
-            x = pos.x - (lens.offsetWidth / 2);
-            y = pos.y - (lens.offsetHeight / 2);
-            /*prevent the lens from being positioned outside the image:*/
-            if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
-            if (x < 0) {x = 0;}
-            if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
-            if (y < 0) {y = 0;}
-            /*set the position of the lens:*/
-            lens.style.left = x + "px";
-            lens.style.top = y + "px";
-            /*display what the lens "sees":*/
-            result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
-          }
-          function getCursorPos(e) {
-            var a, x = 0, y = 0;
-            e = e || window.event;
-            /*get the x and y positions of the image:*/
-            a = img.getBoundingClientRect();
-            /*calculate the cursor's x and y coordinates, relative to the image:*/
-            x = e.pageX - a.left;
-            y = e.pageY - a.top;
-            /*consider any page scrolling:*/
-            x = x - window.pageXOffset;
-            y = y - window.pageYOffset;
-            return {x : x, y : y};
-          }
-        }
     </script>
 
 </body>

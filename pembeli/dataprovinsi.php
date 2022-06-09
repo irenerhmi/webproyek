@@ -26,18 +26,20 @@ if ($err) {
   //echo $response;
   // Hasilnya dalam bentuk json
   // kita koversi ke array
-  $array_response = json_decode($response, TRUE);
+  $data = json_decode($response, TRUE);
+
+  //echo "<pre>"; print_r($data); echo "</pre>";
 
   //kita mau ambil yg didalem result jadi masuk dlu ke rajaongkir baru ke result
-  $dataprovinsi = $array_response['rajaongkir']['results'];
+  //$dataprovinsi = $array_response['rajaongkir']['results'];
   
-  echo "<option value=''>-Pilih provinsi--</option>";
+  //echo "<option value=''>-Pilih provinsi--</option>";
 
-  foreach($dataprovinsi as $key => $tiap_provinsi){
+  /*foreach($dataprovinsi as $key => $tiap_provinsi){
     echo "<option value='".$tiap_provinsi['province_id']."' id_provinsi='".$tiap_provinsi['province_id']."'>";
     echo $tiap_provinsi['province'];
     echo "</option>";
-  }
+  }*/
 }
 
 ?>

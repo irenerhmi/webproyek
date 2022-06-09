@@ -8,6 +8,9 @@ if(!isset($_SESSION['username'])){
 }
 require "../koneksidb.php";
 
+$username = $_SESSION['username'];
+
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -113,10 +116,10 @@ require "../koneksidb.php";
                                         
                                             # code...
                                         $total = 0;
-                                        $ambil = $conn->query("SELECT p.id_produk as produkid, w.qty as stokw, w.id_produk as produkidk, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, p.stok as stok
+                                        $ambil = $conn->query("SELECT p.id_produk as produkid, w.qty as stokw, w.id_produk as produkidk, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, p.stok as stok, w.u_username as uname 
                                             from wishlist w
                                             join produk p
-                                            WHERE w.id_produk=p.id_produk and w.w_flag=1");
+                                            WHERE w.id_produk=p.id_produk and w.w_flag=1 AND w.u_username='".$username."'");
                                             while($pecah = $ambil->fetch_assoc()){
                                             
                                         

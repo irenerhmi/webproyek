@@ -8,6 +8,8 @@ if(!isset($_SESSION['username'])){
 }
 require "../koneksidb.php";
 
+$username = $_SESSION['username'];
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -113,10 +115,10 @@ require "../koneksidb.php";
                                             # code...
                                         $total = 0;
                                         
-                                        $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama
+                                        $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
                                             from keranjang k
                                             join produk p
-                                            WHERE k.id_produk=p.id_produk and k.c_flag=1");
+                                            WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
                                         while($pecah = $ambil->fetch_assoc()){                                 
                                             $subtotal = $pecah['harga']*$pecah['quantity'];
                                     
@@ -163,7 +165,7 @@ require "../koneksidb.php";
                                     <p class="cart_amount">Rp. <?php echo number_format($total); ?></p>
                                 </div>
                                 <div class="checkout_btn">
-                                    <button type="button" onclick="cobaganti()" class="btn btn-sm btn-radius btn-default" href="">Proceed to Checkout</button>
+                                    <a type="button"  class="btn btn-sm btn-radius btn-default" href="checkout.php">Proceed to Checkout</a>
                                 </div>
                                 <?php } else {
                                   

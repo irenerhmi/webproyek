@@ -316,14 +316,21 @@ require "../koneksidb.php";
                                         <input type="text" value="<?php echo $alamat; ?>">
                                     </div>
                                 </div>
+                                <form method="GET">
                                 <div class="col-12">
                                     <div class="default-form-box">
                                         <label>Provinsi </label>
-                                        <select class="form-control" name="provinsi">
-                                            
+                                        <select class="form-control" id="nama_provinsi" name="nama_provinsi">
+                                            <option>-- Pilih Provinsi--</option>
+                                            <?php
+                                                foreach ($data->rajaongkir->results as $provinsi) {
+                                                    echo '<option>-- '.$provinsi->province_id.'--</option>';
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
+                                </form>
                                 <div class="col-12">
                                     <label class="checkbox-default" for="newShipping" data-bs-toggle="collapse" data-bs-target="#anotherShipping">
                                         <input type="checkbox" id="newShipping">
@@ -428,19 +435,21 @@ require "../koneksidb.php";
                                         <?php
                                         $total = 0;
 
-                                        foreach ($_SESSION['keranjang'] as $id => $qty):
-                                        $ambil = mysqli_query($conn, "select * from produk  where id_produk='".$id."'" );
-                                        $pecah = mysqli_fetch_assoc($ambil);
-                                        $subtotal = $qty*$pecah['harga'];
+                                       $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
+                                            from keranjang k
+                                            join produk p
+                                            WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
+                                        while($pecah = $ambil->fetch_assoc()){                                 
+                                            $subtotal = $pecah['harga']*$pecah['quantity'];
                                         ?>
                                         <tr>
-                                            <td> <?php echo $pecah['nama_produk']; ?> <strong> x<?php echo $qty;?></strong></td>
+                                            <td> <?php echo $pecah['nama']; ?> <strong>  x<?php echo $pecah['quantity'];?></strong></td>
                                             <td> <?php echo $pecah['harga']; ?></td>
                                         </tr>
                                     </tbody>
                                         <?php 
                                         $total+=$subtotal;
-                                        endforeach 
+                                        }
                                         ?>
                                     <tfoot>
                                         <tr>
@@ -509,8 +518,6 @@ require "../koneksidb.php";
     <script src="assets/js/plugins/ion.rangeSlider.min.js"></script>
     <script src="assets/js/plugins/venobox.min.js"></script>
     <script src="assets/js/plugins/ajax-mail.js"></script>
-    <script src="../assets/js/jquery.js"></script>
-
     <!-- Minify Version -->
     <!-- <script src="assets/js/vendor/vendor.min.js"></script> -->
     <!-- <script src="assets/js/plugins/plugins.min.js"></script> -->
@@ -519,15 +526,25 @@ require "../koneksidb.php";
     <script src="assets/js/main.js"></script>
     <script>
         $(document).ready(function(){
-          $.ajax({
-            type: 'post',
-            url: 'dataprovinsi.php',
-            success: function(hasil_provinsi){
-              $("select[name=provinsi]").html(hasil_provinsi);
-            }
-          });
+            $('#provinsi').change(function(){
+            //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
+            var prov = $('#provinsi').val();
+                  $.ajax({
+                    type: 'GET',
+                    url: 'dataprovinsi.php',
+                    data :  'prov_id=' + prov,
+                    success: function(hasil_provinsi){
+                      alert('berhasil');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('gagal');
+                    }
+                  });
+            });
+        });
+    </script>
 
-      $("select[name=nama_provinsi]").on("change", function(){
+      <!--$("select[name=nama_provinsi]").on("change", function(){
             // Ambil id_provinsi ynag dipilih (dari atribut pribadi)
             var id_provinsi_terpilih = $("option:selected", this).attr("id_provinsi");
             $.ajax({
@@ -538,8 +555,7 @@ require "../koneksidb.php";
                 $("select[name=nama_distrik]").html(hasil_distrik);
               }
             })
-          });
-    </script>
+          }); -->
 
 </body>
 

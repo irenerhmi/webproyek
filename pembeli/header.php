@@ -62,7 +62,8 @@
                         <div class="header-action">
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas"><img src="assets/images/icons/icon-heart-light.svg" alt=""><span class="count-tag">
                                 <?php
-                                $sqlcek1 = "SELECT * FROM wishlist where w_flag = 1";
+                                $username = $_SESSION['username'];
+                                $sqlcek1 = "SELECT * FROM wishlist where w_flag = 1 and u_username='".$username."'";
                                 $hit1 = mysqli_query($conn, $sqlcek1);
                                 $countw = $hit1->num_rows;
 
@@ -75,7 +76,7 @@
                             </span></button>
                             <button class="header-action-item header-action-wishlist" data-bs-toggle="offcanvas" data-bs-target="#addcartOffcanvas"><img src="assets/images/icons/icon-shopping-bag-light.svg" alt=""><span class="count-tag">
                                 <?php
-                                $sqlcek = "SELECT * FROM keranjang where c_flag = 1";
+                                $sqlcek = "SELECT * FROM keranjang where c_flag = 1 and u_username='".$username."'";
                                 $hit = mysqli_query($conn, $sqlcek);
                                 $count = $hit->num_rows;
 
@@ -250,10 +251,10 @@
             <?php
                     $total = 0;
                                         
-                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, w.w_flag as flag
+                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, w.w_flag as flag, w.u_username as uname
                     from wishlist w
                     join produk p
-                    WHERE w.w_flag=1 AND w.id_produk=p.id_produk");      
+                    WHERE w.w_flag=1 AND w.id_produk=p.id_produk AND w.u_username='".$username."'");      
                 while($pecah = $ambil->fetch_assoc()){
 
             ?>
@@ -272,7 +273,7 @@
                         </div>
                     </div>
                     <div class="item-delete text-right">
-                        <a href="hapuswish.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
+                        <!--<a href="hapuswish.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>-->
                     </div>
                 </li>
             </ul>
@@ -294,10 +295,10 @@
             <?php
                     $total = 0;
                                         
-                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.c_flag as flag
+                $ambil = $conn->query("SELECT p.id_produk as produkid, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.c_flag as flag, k.u_username as uname
                     from keranjang k
                     join produk p
-                    WHERE k.c_flag=1 AND k.id_produk=p.id_produk");      
+                    WHERE k.c_flag=1 AND k.id_produk=p.id_produk AND k.u_username='".$username."'");      
                 while($pecah = $ambil->fetch_assoc()){                                  
                     $subtotal = $pecah['harga']*$pecah['quantity'];
 
@@ -318,7 +319,7 @@
                         </div>
                     </div>
                     <div class="item-delete text-right">
-                        <a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
+                        <!--<a href="hapuscart.php?id=<?= $id; ?>"><img src="assets/images/icons/icon-trash.svg" alt=""></a>-->
                     </div>
                 </li>
             </ul>
