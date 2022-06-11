@@ -58,139 +58,6 @@ require "../koneksidb.php";
     <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
 
     <!--  .....::::: Start Wishlist Offcanvas Section :::::.... -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="wishlistOffcanvas">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Wishlist</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="offcanvas-products-list">
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-1.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Tops</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$100.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-2.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Leggings</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$49.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-3.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Casual Shirt</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$65.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-            </ul>
-            <div class="offcanvas-action-link">
-                <a href="wishlist.html" class="btn">View wishlist</a>
-            </div>
-        </div>
-    </div>
-    <!-- ...:::: End Wishlist Offcanvas Section:::... -->
-
-    <!--  .....::::: Start Add Cart Offcanvas Section :::::.... -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="addcartOffcanvas">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Add Cart</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="offcanvas-products-list">
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-1.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Tops</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$100.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-2.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Leggings</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$49.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-                <li class="single-item">
-                    <div class="box">
-                        <a href="" class="image">
-                            <img src="assets/images/products/small/product-small-3.webp" alt="" class="offcanvas-wishlist-image">
-                        </a>
-                        <div class="content">
-                            <a href="" class="title">Casual Shirt</a>
-                            <div class="offcanvas-wishlist-item-details">
-                                <span class="offcanvas-wishlist-item-details-quantity">1 x </span>
-                                <span class="offcanvas-wishlist-item-details-price">$65.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-delete text-right">
-                        <a href="#"><img src="assets/images/icons/icon-trash.svg" alt=""></a>
-                    </div>
-                </li>
-            </ul>
-            <div class="offcanvas-action-link">
-                <a href="cart.html" class="btn">Add Cart</a>
-                <a href="checkout.html" class="btn">Checkout</a>
-            </div>
-        </div>
-    </div>
-    <!-- ...:::: End Add Cart Offcanvas Section:::... -->
 
     <!-- ...::: Strat Breadcrumb Section :::... -->
     <div class="breadcrumb-section">
@@ -265,235 +132,254 @@ require "../koneksidb.php";
                 <!-- User Quick Action Form -->
             </div>
             <!-- Start User Details Checkout Form -->
-            <div class="checkout_form">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <?php
-                        $sql = "select * from user where u_username = '".$_SESSION['username']."' ";
+            <form method="post">
+                <div class="checkout_form">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <?php
+                            $sql = "select * from user where u_username = '".$_SESSION['username']."' ";
 
-                        $result = mysqli_query($conn, $sql);
+                            $result = mysqli_query($conn, $sql);
 
-                        $row = mysqli_fetch_array($result);
+                            $row = mysqli_fetch_array($result);
 
-                        $nama = $row['u_nama'];
-                        $email = $row['u_email'];
-                        $alamat = $row['u_alamat'];
-                        $nomor = $row['u_nohp'];
-                        ?>
-                        <form id="form" class="form" action="#" method="post">
-                            <h3>Billing Details</h3>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label>Nama Lengkap <span>*</span></label>
-                                        <input type="text" id="name" value="">
-                                        <i class="fas fa-check-circle"></i>
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <small>Error message</small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="default-form-box">
-                                        <label>Email <span>*</span></label>
-                                        <input type="text" value="<?php echo $email; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Nomor Handphone </label>
-                                        <input type="number" value="<?php echo $nomor; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Tempat </label>
-                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Alamat </label>
-                                        <input type="text" value="<?php echo $alamat; ?>">
-                                    </div>
-                                </div>
-                                <form method="GET">
-                                <div class="col-12">
-                                    <div class="default-form-box">
-                                        <label>Provinsi </label>
-                                        <select class="form-control" id="nama_provinsi" name="nama_provinsi">
-                                            <option>-- Pilih Provinsi--</option>
-                                            <?php
-                                                foreach ($data->rajaongkir->results as $provinsi) {
-                                                    echo '<option>-- '.$provinsi->province_id.'--</option>';
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                </form>
-                                <div class="col-12">
-                                    <label class="checkbox-default" for="newShipping" data-bs-toggle="collapse" data-bs-target="#anotherShipping">
-                                        <input type="checkbox" id="newShipping">
-                                        <span>Ship to a different address?</span>
-                                    </label>
-
-                                    <div id="anotherShipping" class="collapse mt-3" data-parent="#anotherShipping">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="default-form-box">
-                                                    <label>First Name <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="default-form-box">
-                                                    <label>Last Name <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="default-form-box">
-                                                    <label>Company Name</label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="select_form_select default-form-box">
-                                                    <label for="countru_name">country <span>*</span></label>
-                                                    <select class="country_option niceselect_option wide" name="cuntry" id="countru_name">
-                                                        <option value="2">Bangladesh</option>
-                                                        <option value="3">Algeria</option>
-                                                        <option value="4">Afghanistan</option>
-                                                        <option value="5">Ghana</option>
-                                                        <option value="6">Albania</option>
-                                                        <option value="7">Bahrain</option>
-                                                        <option value="8">Colombia</option>
-                                                        <option value="9">Dominican Republic</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="default-form-box">
-                                                    <label>Street address <span>*</span></label>
-                                                    <input placeholder="House number and street name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="default-form-box">
-                                                    <input placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="default-form-box">
-                                                    <label>Town / City <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="default-form-box">
-                                                    <label>State / County <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="default-form-box">
-                                                    <label>Phone<span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="default-form-box">
-                                                    <label> Email Address <span>*</span></label>
-                                                    <input type="text">
-                                                </div>
-                                            </div>
+                            $nama = $row['u_nama'];
+                            $email = $row['u_email'];
+                            $alamat = $row['u_alamat'];
+                            $nomor = $row['u_nohp'];
+                            ?>
+                                <h3>Billing Details</h3>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="default-form-box">
+                                            <label>Nama Lengkap <span>*</span></label>
+                                            <input type="text" id="name" value="<?php echo $nama;?>">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <div class="order-notes">
-                                        <label for="order_note">Order Notes</label>
-                                        <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    <div class="col-lg-6">
+                                        <div class="default-form-box">
+                                            <label>Email <span>*</span></label>
+                                            <input type="text" value="<?php echo $email; ?>">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <form action="#">
-                            <h3>Your order</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $total = 0;
-
-                                       $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
-                                            from keranjang k
-                                            join produk p
-                                            WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
-                                        while($pecah = $ambil->fetch_assoc()){                                 
-                                            $subtotal = $pecah['harga']*$pecah['quantity'];
-                                        ?>
-                                        <tr>
-                                            <td> <?php echo $pecah['nama']; ?> <strong>  x<?php echo $pecah['quantity'];?></strong></td>
-                                            <td> <?php echo $pecah['harga']; ?></td>
-                                        </tr>
-                                    </tbody>
-                                        <?php 
-                                        $total+=$subtotal;
-                                        }
-                                        ?>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Subtotal</th>
-                                            <td>
-                                                <?php 
-                                                echo number_format($total);
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <label>Nomor Handphone </label>
+                                            <input type="number" value="<?php echo $nomor; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <label>Tempat </label>
+                                            <input type="text" placeholder="Apartment, suite, unit etc. (optional)" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <label>Alamat </label>
+                                            <input type="text" name="alamatpeng" value="<?php echo $alamat; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <label>Provinsi </label>
+                                            <select class="form-control" id="nama_provinsi" name="nama_provinsi">
+                                                <option>-- Pilih Provinsi--</option>
+                                                <?php
+                                                    foreach ($data->rajaongkir->results as $provinsi) {
+                                                        echo '<option>-- '.$provinsi->province.'--</option>';
+                                                    }
                                                 ?>
-                                            </td>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment_method">
-                                <div class="panel-default">
-                                    <label class="checkbox-default" for="currencyCod" data-bs-toggle="collapse" data-bs-target="#methodCod">
-                                        <input type="radio" id="currencyCod" name="payment" checked>
-                                        <span>Cash on Delivery</span>
-                                    </label>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="order-notes">
+                                            <label for="order_note">Order Notes</label>
+                                            <textarea id="order_note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                                <h3>Your order</h3>
+                                <div class="order_table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $total = 0;
 
-                                    <div id="methodCod" class="collapse" data-bs-parent="#methodCod">
-                                        <div class="card-body1">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                        </div>
+                                           $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
+                                                from keranjang k
+                                                join produk p
+                                                WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
+                                            while($pecah = $ambil->fetch_assoc()){                                 
+                                                $subtotal = $pecah['harga']*$pecah['quantity'];
+                                            ?>
+                                            <tr>
+                                                <td> <?php echo $pecah['nama']; ?> <strong>  x<?php echo $pecah['quantity'];?></strong></td>
+                                                <td> <?php echo $pecah['harga']; ?></td>
+                                            </tr>
+                                        </tbody>
+                                            <?php 
+                                            $total+=$subtotal;
+                                            }
+                                            ?>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Subtotal</th>
+                                                <td>
+                                                    <?php 
+                                                    echo number_format($total);
+                                                    ?>
+                                                </td>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="payment_method">
+                                    <div class="default-form-box">
+                                        <label>Nama Ekspedisi </label>
+                                            <select name="ekspedisi" class="form-control">
+                                                <option value="">Pilih Ekspedisi</option>          
+                                                <option value="JNT">
+                                                    JNT
+                                                </option>
+                                                <option value="JNE">
+                                                    JNE
+                                                </option>
+                                                <option value="SiCepat">
+                                                    SiCepat
+                                                </option>
+                                            </select>
+                                        <br>
+                                    </div>
+                                    <div class="default-form-box">
+                                        <br> <label>Ongkos Kirim </label>
+                                            <select name="ongkir" class="form-control">
+                                                <option value="">Pilih Ongkos Kirim</option>
+                                                <?php
+                                                $ambil = mysqli_query($conn, "SELECT * from ongkir");
+                                                while($pecah = mysqli_fetch_assoc($ambil)){
+                                                ?>                                      
+                                                <option value="<?php echo $pecah['tarif'] ?>">
+                                                    <?php echo $pecah['daerah']?> - 
+                                                    Rp. <?php echo number_format($pecah['tarif'])?>
+                                                </option>
+                                                <?php } ?>
+                                            </select>
+                                        <br>
+                                    </div>
+                                    <div class="default-form-box">
+                                        <br> <label>Metode Pembayaran</label>
+                                            <select name="id_metode" class="form-control">
+                                                <option value="">Pilih Metode Pembayaran</option>
+                                                <?php
+                                                $ambil = mysqli_query($conn, "SELECT * from metode_bayar");
+                                                while($pecah = mysqli_fetch_assoc($ambil)){
+                                                ?>                                      
+                                                <option value="<?php echo $pecah['id_metode'] ?>">
+                                                    <?php echo $pecah['nama_metode']?>
+                                                </option>
+                                                <?php } ?>
+                                            </select>
+                                        <br>
+                                    </div>
+                                <div class="payment_method">
+                                    <div class="order_button"><br>
+                                        <button class="btn btn-sm btn-radius btn-default" name="checkout">Proceed to Payment</button>
                                     </div>
                                 </div>
-                                <div class="panel-default">
-                                    <label class="checkbox-default" for="currencyPaypal" data-bs-toggle="collapse" data-bs-target="#methodPaypal">
-                                        <input type="radio" id="currencyPaypal" name="payment">
-                                        <span>PayPal</span>
-                                    </label>
-                                    <div id="methodPaypal" class="collapse" data-bs-parent="#methodPaypal">
-                                        <div class="card-body1">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order_button">
-                                    <button class="btn btn-sm btn-radius btn-default" type="submit">Proceed to PayPal</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div> <!-- Start User Details Checkout Form -->
+                </div> <!-- Start User Details Checkout Form -->
+            </form>
+            <?php
+                            if (isset($_POST['checkout'])) 
+                            {
+
+                                $id_pelanggan = $_SESSION['username'];
+                                $alamat = $_POST['alamatpeng'];
+                                $ongkir = $_POST['ongkir'];
+                                $metode = $_POST['id_metode'];
+                                $namaeks = $_POST['ekspedisi'];
+                                $tanggal_trans =  date("Y-m-d");
+
+                                $totaltrans = 0;
+                                $totaltrans = $total + $ongkir;
+
+                                //menyimpan data ke table transaski
+                                $resulttr = mysqli_query($conn,"INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "', '" . $id_pelanggan . "')");
+
+                                /*$sql = "INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "', '" . $id_pelanggan . "')";
+
+                                if ($conn->query($sql) === TRUE) {
+                                    echo "berhasil";
+                                } else {
+                                    echo "Error: " . $sql . "<br>" . $conn->error;
+                                }*/
+
+                                //menyimpan data ke table detail dilakukan
+                                $id_baru = mysqli_insert_id($conn); 
+                                $_SESSION['idtransbaru'] = $id_baru;
+
+                                //menambahkan data produk biar harganya fix
+                                $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
+                                                from keranjang k
+                                                join produk p
+                                                WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
+                                while($pecah = $ambil->fetch_assoc()){ 
+                                    $id = $pecah['produkidk'];
+                                    $namat = $pecah['nama'];
+                                    echo $namat;
+                                    echo $id;
+                                    $hargat = $pecah['harga'];
+                                    $qty = $pecah['quantity'];
+
+                                    $dilakukan = "INSERT INTO dilakukan (nama_p, harga_p, id_transaksi, id_produk, jumlah_p, u_username) VALUES ('" . $namat . "','" . $hargat . "', '" . $id_baru . "', '" . $id . "', '" . $qty . "', '" . $id_pelanggan . "')";
+                                    $resultd = mysqli_query($conn,$dilakukan);
+                                    
+                                    if ($resultd === TRUE){
+
+                                        $stok = mysqli_query($conn, "UPDATE produk SET stok=stok - $qty where id_produk='".$id."'");
+
+                                        if ($stok === TRUE) {
+                                            echo "<script>
+                                                window.alert(' checkout berhasil!')
+                                              </script>";
+
+                                        } else {
+
+                                            echo $stok;
+                                        }
+                                        
+                                    } else {
+
+                                        echo $dila;
+                                    }
+                                };
+
+                                // menyimpan data ke table pembayaran
+                                $resultpb = mysqli_query($conn,"INSERT INTO pembayaran (jml_bayar, id_metode, id_transaksi) VALUES ('" . $totaltrans . "','" . $metode . "','" . $id_baru . "')");
+
+                                $id_bayarbar = mysqli_insert_id($conn); 
+                                $_SESSION['idtbayarbar'] = $id_bayarbar;
+
+                                // menyimpan data ke table pengiriman
+                                $resultpb = mysqli_query($conn,"INSERT INTO pengiriman (nama_ekspedisi, status_peng, alamatpeng, id_bayar) VALUES ('" . $namaeks . "','Belum Dikirim', '" . $alamat . "' , '" . $id_bayarbar . "')");
+
+                                // unset($_SESSION['cart'][$_GET['id']]);
+                                echo "<script>
+                                        window.location ='nota.php'; 
+                                      </script>"; 
+                                
+                            }
+                        ?>
         </div>
     </div><!-- ...:::: End Checkout Section:::... -->
 
