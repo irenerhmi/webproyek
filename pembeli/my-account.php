@@ -3,7 +3,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['pem_username'])){
     header("location: login.php");
 }
 require "../koneksidb.php";
@@ -90,7 +90,7 @@ require "../koneksidb.php";
                     <div class="dashboard_tab_button">
                         <ul role="tablist" class="nav flex-column dashboard-list">
                             <li><a href=""  class="nav-link btn btn-sm btn-default-outline  active">Akun Saya</a></li>
-                            <li> <a href="#orders"  class="nav-link btn btn-sm btn-default-outline ">Lihat Pesanan Saya</a></li>
+                            <li> <a href="riwayat.php"  class="nav-link btn btn-sm btn-default-outline ">Lihat Pesanan Saya</a></li>
                             <li><a href="login.html" class="nav-link btn btn-sm btn-default-outline">Logout</a></li>
                         </ul>
                     </div>
@@ -107,7 +107,7 @@ require "../koneksidb.php";
                                             <?php
 
 
-                                            $sql = "select * from user where u_username='".$_SESSION['username']."'";
+                                            $sql = "select * from user where u_username='".$_SESSION['pem_username']."'";
 
                                             $result = mysqli_query($conn,$sql);
 

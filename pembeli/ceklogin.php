@@ -19,12 +19,12 @@ if(isset($_POST['submit'])){
     //echo $row['u_password'];
 
     if(mysqli_num_rows($result) > 0){
-        $_SESSION['username'] = $row['u_username'];
-        $_SESSION['name'] = $row['u_nama'];
-        $_SESSION['email'] = $row['u_email'];
-        $_SESSION['phone'] = $row['u_nohp'];
-        $_SESSION['alamat'] = $row['u_alamat'];
-        $_SESSION['image'] = $row['u_image'];     
+        $_SESSION['pem_username'] = $row['u_username'];
+        $_SESSION['pem_name'] = $row['u_nama'];
+        $_SESSION['pem_email'] = $row['u_email'];
+        $_SESSION['pem_phone'] = $row['u_nohp'];
+        $_SESSION['pem_alamat'] = $row['u_alamat'];
+        $_SESSION['pem_image'] = $row['u_image'];     
 
         // cek password
         $hash = $row['u_password'];
@@ -48,8 +48,12 @@ if(isset($_POST['submit'])){
     } 
     else {
         echo '<script> alert("username atau password salah") </script>';
-        header ("location: login.php");
+        //header ("location: login.php");
 
     }
+} else {
+    echo "<alert> 
+    (Tidak masuk);
+    </alert>";
 }
 ?>

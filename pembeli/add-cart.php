@@ -5,7 +5,7 @@ session_start();
     $idproduk = mysqli_real_escape_string($conn, $_POST['idPro']);
     $namaproduk = mysqli_real_escape_string($conn, $_POST['namaPro']);
     $qtyproduk = mysqli_real_escape_string($conn, $_POST['qtyPro']);
-    $username = $_SESSION["username"];
+    $username = $_SESSION["pem_username"];
 
     $sqlcek = "SELECT * FROM keranjang where id_produk = '".$idproduk."' and c_flag=1 and u_username = '".$username."'";
     $hit = mysqli_query($conn, $sqlcek);

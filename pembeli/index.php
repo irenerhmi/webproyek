@@ -3,7 +3,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['pem_username'])){
     header("location: login.php");
 }
 require "../koneksidb.php";
@@ -78,9 +78,9 @@ require "../koneksidb.php";
                                             <div class="col-xl-7 col-md-8">
                                                 <div class="content-fluid">
                                                     <span class="title-tag"> </span>
-                                                    <h2 class="title">Belanja merchandise <br>K-pop dengan <span class="text-mark">HaulHayul</span></h2>
+                                                    <h2 class="title">Belanja merchandise <br>K-pop dengan <span class="text-mark">HaulHallyu</span></h2>
                                                     <p></p>
-                                                    <a href="product-details-default.html" class="btn btn-lg btn-default">Shop Now</a>
+                                                    <a href="hal-produk-hot deals" class="btn btn-lg btn-default">Lihat Produk Hot Deals</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@ require "../koneksidb.php";
                             <!-- Start Hero Slider Single Item -->
                             <div class="hero-slider-single-item--style-2 swiper-slide">
                                 <div class="image">
-                                    <img class="img-fluid" src="assets/images/hero-slider/hero-slider-style-2-img-2.png" alt="">
+                                    <img class="img-fluid" src="../assets/images/breadcrumb/headerlogin.jpg" alt="">
                                 </div>
                                 <div class="image-shape"></div>
                                 <div class="content-box section-fluid-270">
@@ -102,9 +102,9 @@ require "../koneksidb.php";
                                             <div class="col-xl-7 col-md-8">
                                                 <div class="content">
                                                     <span class="title-tag">BEST DEAL FOREVER</span>
-                                                    <h2 class="title">It's elegant to <span class="text-mark">look</span> & value of <span class="text-mark">Price</span></h2>
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority.</p>
-                                                    <a href="product-details-default.html" class="btn btn-lg btn-default">GET IT NOW</a>
+                                                    <h2 class="title">Belanja merchandise <br>K-pop dengan <span class="text-mark">HaulHallyu</span></h2>
+                                                    <p></p>
+                                                    <a href="hal-produk-hot deals" class="btn btn-lg btn-default">Lihat Produk Ready Stock</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,8 +147,8 @@ require "../koneksidb.php";
                     <div class="row justify-content-center flex-warp">
                         <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7 col-10">
                             <div class="section-content section-content-gap-60 text-center">
-                                <h2 class="section-title">Coming Soon</h2>
-                                <p>Produk yang akan segera hadir</p>
+                                <h2 class="section-title">Hot Deals</h2>
+                                <p>Produk yang sedang trend</p>
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ require "../koneksidb.php";
             <div class="product-tab-item-wrapper">
                 <div class="container">
                     <div class="row g-5">
-                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 AND status='PO' limit 6"); ?>
+                        <?php $ambil = $conn->query("SELECT * from produk where p_flag = 1 limit 6"); ?>
                         <?php while($perproduk = $ambil->fetch_assoc()){?>
                         <div class="col-4">
                             <!-- Start Tab Content Items -->
@@ -221,7 +221,7 @@ require "../koneksidb.php";
                             <!-- End Tab Content Items -->
                             <?php } ?>
                             <div class="d-flex justify-content-center">
-                                <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
+                                <a href="hal-produk-hot deals.php" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
                             </div>
                         </div>
                     </div>
@@ -324,7 +324,7 @@ require "../koneksidb.php";
                             <!-- End Tab Content Items -->
                             <?php } ?>
                             <div class="d-flex justify-content-center">
-                                <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
+                                <a href="hal-produk-ready stock.php" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
                             </div>
                         </div>
                     </div>
@@ -427,7 +427,7 @@ require "../koneksidb.php";
                             <!-- End Tab Content Items -->
                             <?php } ?>
                             <div class="d-flex justify-content-center">
-                                <a href="shop-grid-sidebar-left.html" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
+                                <a href="hal-produk-pre order.php" class="btn btn-md btn-default btn-section-bottom">View All Product</a>
                             </div>
                         </div>
                     </div>

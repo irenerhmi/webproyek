@@ -3,17 +3,19 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['pem_username'])){
     header("location: login.php");
 }
 require "../koneksidb.php";
+
+$username = $_SESSION['pem_username'];
 
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Martup - Multipurpose eCommerce HTML Template</title>
+    <title>Checkout - HaulHallyu</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Martup is Multipurpose eCommerce HTML Template, that's perfect for any kind of eCommerce websites such as fashion, furniture and many more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,7 +139,7 @@ require "../koneksidb.php";
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <?php
-                            $sql = "select * from user where u_username = '".$_SESSION['username']."' ";
+                            $sql = "select * from user where u_username = '".$_SESSION['pem_username']."' ";
 
                             $result = mysqli_query($conn, $sql);
 
@@ -215,7 +217,7 @@ require "../koneksidb.php";
                                             <?php
                                             $total = 0;
 
-                                           $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
+                                           $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, p.nama_produk as nama, k.u_username as uname
                                                 from keranjang k
                                                 join produk p
                                                 WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");
@@ -303,7 +305,7 @@ require "../koneksidb.php";
                             if (isset($_POST['checkout'])) 
                             {
 
-                                $id_pelanggan = $_SESSION['username'];
+                                $id_pelanggan = $_SESSION['pem_username'];
                                 $alamat = $_POST['alamatpeng'];
                                 $ongkir = $_POST['ongkir'];
                                 $metode = $_POST['id_metode'];
@@ -329,7 +331,7 @@ require "../koneksidb.php";
                                 $_SESSION['idtransbaru'] = $id_baru;
 
                                 //menambahkan data produk biar harganya fix
-                                $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, k.nama_produk as nama, k.u_username as uname
+                                $ambil = $conn->query("SELECT p.id_produk as produkid, k.id_produk as produkidk, p.harga as harga, p.image as image, k.qty as quantity, p.nama_produk as nama, k.u_username as uname
                                                 from keranjang k
                                                 join produk p
                                                 WHERE k.id_produk=p.id_produk and k.c_flag=1  AND k.u_username='".$username."'");

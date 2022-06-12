@@ -4,7 +4,7 @@ session_start();
 
 //$username = $_POST["username"];
 //$imgprofile = "../ava.jpg";
-$username = $_SESSION["username"];
+$username = $_SESSION["pem_username"];
 $email = $_POST["email"];
 $nama = $_POST["nama"];
 $phone = $_POST["phone"];

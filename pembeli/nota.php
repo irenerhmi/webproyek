@@ -3,14 +3,13 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['pem_username'])){
     header("location: login.php");
 }
 require "../koneksidb.php";
 
-$username = $_SESSION['username'];
-
-
+$username = $_SESSION['pem_username'];
+$idtrans = $_SESSION['idtransbaru'];
 ?>
 <head>
     <meta charset="UTF-8">
@@ -208,7 +207,7 @@ $username = $_SESSION['username'];
                                 <h6>
                                     1. Pilih Transfer.<br> 
                                     <br>2. Pilih <strong> <?php echo $ketb; ?> </strong> <br>
-                                    <br>3. Masukkan no rekening <strong> 137-9087689-000 A/N Prebens Store </strong> <br>
+                                    <br>3. Masukkan no rekening <strong> 137-9087689-000 A/N HaulHallyu </strong> <br>
                                     <br>4. Masukkan nominal pembayaran <br>
                                 </h6>
                                 <form method="POST">

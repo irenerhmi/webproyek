@@ -10,12 +10,14 @@ require "../koneksidb.php";
 
 $username = $_SESSION['pem_username'];
 
+$idpro = $_GET['idpro'];
+$_SESSION['idrevs'] = $idpro;
 
 ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wishlist - HaulHallyu Merch</title>
+    <title>Pembayaran - HaulHallyu Merch</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Martup is Multipurpose eCommerce HTML Template, that's perfect for any kind of eCommerce websites such as fashion, furniture and many more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,11 +70,11 @@ $username = $_SESSION['pem_username'];
                     <div class="breadcrumb-wrapper">
                         <div class="content">
                             <span class="title-tag">BEST DEAL FOREVER</span>
-                            <h2 class="title"><span class="text-mark">Wishlist</span> Page</h2>
+                            <h2 class="title"><span class="text-mark">Rating dan Review</span> Page</h2>
                         </div>
                         <ul class="breadcrumb-nav">
                             <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
-                            <li>Wishlist</li>
+                            <li>Rating dan Review</li>
                         </ul>
                     </div>
                 </div>
@@ -81,89 +83,36 @@ $username = $_SESSION['pem_username'];
     </div>
     <!-- ...::: End Breadcrumb Section :::... -->
 
-    <!-- ...:::: Start Wishlist Section:::... -->
-    <div class="wishlist-section section-fluid-270 section-top-gap-100">
-        <!-- Start Cart Table -->
-        <div class="wishlish-table-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table_desc">
-                            <div class="table_page table-responsive">
-                                <table>
-                                    <!-- Start Wishlist Table Head -->
-                                    <?php 
-                                    $sqlcek = "SELECT * FROM keranjang";
-                                    $hit = mysqli_query($conn, $sqlcek);
-                                    $count = $hit->num_rows;
-                                    if ($count>=1) {?>
-                                    <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_stock">Quantity</th>
-                                            <th class="product_addcart">Add To Cart</th>
-                                        </tr>
-                                    </thead> <!-- End Cart Table Head -->
-                                    <tbody>
-                                        <!-- Start Wishlist Single Item-->
-                                        <?php 
-                                        /*echo "<pre>";
-                                        print_r($_SESSION['cart']);
-                                        echo "<pre>";*/
-                                        
-                                            # code...
-                                        $total = 0;
-                                        $ambil = $conn->query("SELECT p.id_produk as produkid, w.qty as stokw, w.id_produk as produkidk, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, p.stok as stok, w.u_username as uname 
-                                            from wishlist w
-                                            join produk p
-                                            WHERE w.id_produk=p.id_produk and w.w_flag=1 AND w.u_username='".$username."'");
-                                            while($pecah = $ambil->fetch_assoc()){
-                                            
-                                        
-                                            ?> 
-                                            <tr>
-                                            <form actiom="add-wish.php" method="POST">
-                                                <td class="product_remove">
-                                                    <a onclick="delwish(<?php echo $pecah['produkidk']; ?>)">
-                                                        <img src="assets/images/icons/icon-trash.svg" alt="">
-                                                    </a>
-                                                </td>
-                                                <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['produkidk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
-                                                <td class="product_name"><a href="<?php echo $pecah['produkidk']?>"><?php echo $pecah['nama']?></a></td>
-                                                <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
-                                                <td class="product_stock"><?php echo $pecah['stokw']?></td>
-                                                <td class="product_addcart">
-                                                    <input type="hidden" name="idpro" id="idpro" value="<?php echo $pecah['id_produk']; ?>">
-                                                    <input type="hidden" name="namapro" id="namapro" value="<?php echo $pecah['nama']; ?>">
-                                                    <input type="hidden" name="qtypro" id="qtypro" value=1>
-                                                    <a onclick="sukcart(<?php echo $pecah['produkidk']; ?>)" class="btn btn-sm btn-radius btn-default">Add To Cart</a>
-                                                </td>
-                                            </form>
-                                            </tr> 
-                                            <!-- End Wishlist Single Item-->
-                                        </tbody>
-                                        <?php 
-                                        }
-                                        ?> 
-                                </table>
+    <!-- ...:::: Start Customer Payment Section :::... -->
+    <div class="customer-login section-fluid-270 section-top-gap-100">
+        <div class="container-fluid">
+            <div class="row">
+                <!--login area start-->
+                <div class="col-lg-6 col-md-6">
+                    <div class="account_form">
+                        <h3>Konfirmasi Pembayaran</h3>
+                        <form method="POST" >
+                            <div class="default-form-box">
+                                <label>Masukkan Rating (Range 1-5) </label>
+                                <input type="number" value="" min=1 max=5 name="rating" id="rating" placeholder="Masukkan Rating">
                             </div>
-                        </div>
+                            <div class="default-form-box">
+                                <label>Masukkan Review</label>
+                                <input type="text" value="" name="isirev" id="review" placeholder="Masukkan Review" >
+                            </div>
+                            <div class="login_submit">
+                                <button class="btn btn-sm btn-radius btn-default" onclick="review(<?php echo $_SESSION['idrevs']?>)" name="submit" type="submit" value="submit">Kirim</a></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <!--login area start-->
+
+                <!--register area start-->
+                <!--register area end-->
             </div>
-                                <?php } 
-                                else { 
-                                ?>
-            <!-- Start Cart Table -->
-            <div class="text-center m-5">
-                <h5>Belum ada Barang</h5>
-            </div>
-            <?php }?>
-        </div> <!-- End Cart Table -->
-    </div> <!-- ...:::: End Wishlist Section:::... -->
+        </div>
+    </div> <!-- ...:::: End Customer Payment Section :::... -->
 
     <!-- ...::: Strat Footer Section - Footer Dark :::... -->
     <?php require "footer.php"; ?>
@@ -254,7 +203,37 @@ $username = $_SESSION['pem_username'];
             });
 
         location.reload();
-                 
+ 
+        }
+
+        function review(idpro) {
+
+            var idPro=idnih; 
+            var review=document.getElementById('namapro');  
+            var rating=document.getElementById('qtypro');
+ 
+            if(review==''||rating=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-cart.php",
+                data: {
+                    idPro: idnih,
+                    review: review.value,
+                    rating: rating.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+
+            });
             
  
         }

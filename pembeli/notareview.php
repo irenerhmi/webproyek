@@ -9,13 +9,14 @@ if(!isset($_SESSION['pem_username'])){
 require "../koneksidb.php";
 
 $username = $_SESSION['pem_username'];
-
+$idtrans = $_GET['id'];
+$_SESSION['idtransrevs'] = $idtrans;
 
 ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wishlist - HaulHallyu Merch</title>
+    <title>Detail Pesanan- HaulHallyu Merch</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Martup is Multipurpose eCommerce HTML Template, that's perfect for any kind of eCommerce websites such as fashion, furniture and many more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,11 +69,11 @@ $username = $_SESSION['pem_username'];
                     <div class="breadcrumb-wrapper">
                         <div class="content">
                             <span class="title-tag">BEST DEAL FOREVER</span>
-                            <h2 class="title"><span class="text-mark">Wishlist</span> Page</h2>
+                            <h2 class="title"><span class="text-mark">Detail Pesanan</span> Page</h2>
                         </div>
                         <ul class="breadcrumb-nav">
                             <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
-                            <li>Wishlist</li>
+                            <li>Nota</li>
                         </ul>
                     </div>
                 </div>
@@ -89,79 +90,68 @@ $username = $_SESSION['pem_username'];
                 <div class="row">
                     <div class="col-12">
                         <div class="table_desc">
+                            <h3>Detail Pesanan</h3>
                             <div class="table_page table-responsive">
                                 <table>
                                     <!-- Start Wishlist Table Head -->
-                                    <?php 
-                                    $sqlcek = "SELECT * FROM keranjang";
-                                    $hit = mysqli_query($conn, $sqlcek);
-                                    $count = $hit->num_rows;
-                                    if ($count>=1) {?>
                                     <thead>
                                         <tr>
-                                            <th class="product_remove">Delete</th>
                                             <th class="product_thumb">Image</th>
                                             <th class="product_name">Product</th>
                                             <th class="product-price">Price</th>
-                                            <th class="product_stock">Quantity</th>
-                                            <th class="product_addcart">Add To Cart</th>
                                         </tr>
                                     </thead> <!-- End Cart Table Head -->
                                     <tbody>
-                                        <!-- Start Wishlist Single Item-->
                                         <?php 
-                                        /*echo "<pre>";
-                                        print_r($_SESSION['cart']);
-                                        echo "<pre>";*/
                                         
-                                            # code...
                                         $total = 0;
-                                        $ambil = $conn->query("SELECT p.id_produk as produkid, w.qty as stokw, w.id_produk as produkidk, p.harga as harga, p.image as image, w.qty as quantity, w.nama_produk as nama, p.stok as stok, w.u_username as uname 
-                                            from wishlist w
-                                            join produk p
-                                            WHERE w.id_produk=p.id_produk and w.w_flag=1 AND w.u_username='".$username."'");
-                                            while($pecah = $ambil->fetch_assoc()){
-                                            
-                                        
-                                            ?> 
-                                            <tr>
-                                            <form actiom="add-wish.php" method="POST">
-                                                <td class="product_remove">
-                                                    <a onclick="delwish(<?php echo $pecah['produkidk']; ?>)">
-                                                        <img src="assets/images/icons/icon-trash.svg" alt="">
-                                                    </a>
-                                                </td>
-                                                <td class="product_thumb"><a href="product-details.php?id=<?php echo $pecah['produkidk'];?>"><img src="../image/penjual/<?= $pecah['image']; ?>" width="320px" height="400px" alt=""></a></td>
-                                                <td class="product_name"><a href="<?php echo $pecah['produkidk']?>"><?php echo $pecah['nama']?></a></td>
-                                                <td class="product-price">Rp. <?php echo number_format($pecah['harga']); ?></td><input type="hidden" name="iprice" value="<?php echo number_format($pecah['harga']); ?>">
-                                                <td class="product_stock"><?php echo $pecah['stokw']?></td>
-                                                <td class="product_addcart">
-                                                    <input type="hidden" name="idpro" id="idpro" value="<?php echo $pecah['id_produk']; ?>">
-                                                    <input type="hidden" name="namapro" id="namapro" value="<?php echo $pecah['nama']; ?>">
-                                                    <input type="hidden" name="qtypro" id="qtypro" value=1>
-                                                    <a onclick="sukcart(<?php echo $pecah['produkidk']; ?>)" class="btn btn-sm btn-radius btn-default">Add To Cart</a>
-                                                </td>
-                                            </form>
-                                            </tr> 
-                                            <!-- End Wishlist Single Item-->
-                                        </tbody>
-                                        <?php 
+                                        //query ambil produk
+                                        $tampil = mysqli_query($conn, "SELECT * from dilakukan WHERE id_transaksi='".$idtrans."'");
+                                        while($produk = mysqli_fetch_assoc($tampil)){
+                                        ?>
+                                        <tr>
+                                            <?php
+                                            $idpro= $produk['id_produk'];
+                                            $_SESSION['idpro'] = $idpro;
+                                            $sql = "SELECT * from produk WHERE nama_produk='".$produk["nama_p"]."'";
+                                            $result = mysqli_query($conn,$sql);
+                                            $row = mysqli_fetch_array($result);
+                                            $foto = $row['image'];
+                                            ?>
+                                            <td><img src="../image/penjual/<?= $foto; ?>" width="110px" height="90px"></a></td>
+                                            <td> <?= $produk["nama_p"]; ?> <strong> x<?= $produk["jumlah_p"];; ?> </strong></td>
+                                            <td>Rp. <?php echo number_format($produk['jumlah_p']*$produk['harga_p']); ?> </td>
+                                        </tr>
+                                        <?php
+                                        // menghitung subtotal dan total pesanan
+                                        $subtotal = $produk['jumlah_p']*$produk['harga_p'];
+                                        $total+=$subtotal;
+                                        ?>
+                                        <td>
+                                            <div class="btn btn-sm btn-radius btn-default mb-4">
+                                                <a href="uploadrev.php?idpro=<?php echo $idpro ?>">Review Produk</a>
+                                            </div>
+                                        </td>
+                                        <?php
                                         }
-                                        ?> 
+                                        ?>
+                                        </tr> 
+                                    </tbody>
+                                    <?php $total+=$subtotal; ?>
+                                        <?php 
+                                        //query ambil ongkir
+                                        $resultr = mysqli_query($conn,"SELECT * from transaksi where id_transaksi='$idtrans'");
+                                        $rowtr = mysqli_fetch_array($resultr);
+                                        $jumong = $rowtr['tarif'];
+                                        $idtrans_baru = $conn->insert_id; 
+                                        ?>
+
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                                <?php } 
-                                else { 
-                                ?>
-            <!-- Start Cart Table -->
-            <div class="text-center m-5">
-                <h5>Belum ada Barang</h5>
-            </div>
-            <?php }?>
         </div> <!-- End Cart Table -->
     </div> <!-- ...:::: End Wishlist Section:::... -->
 
@@ -224,6 +214,42 @@ $username = $_SESSION['pem_username'];
         }
 
         function sukcart(idnih) {
+
+            var idPro=idnih; 
+            var namaPro=document.getElementById('namapro');  
+            var qtyPro=document.getElementById('qtypro');   
+            var message=document.getElementById('message'); 
+ 
+            if(idPro==''||namaPro==''||qtyPro=='') {
+                alert("Please fill all fields.");
+                return false;
+                console.log('kosong');
+            } else {
+                console.log(idPro);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "add-cart.php",
+                data: {
+                    idPro: idnih,
+                    namaPro: namaPro.value,
+                    qtyPro: qtyPro.value
+                },
+                cache: false,
+                success: function(data) {
+                    alert(data);
+                }
+
+            });
+
+        location.reload();
+                 
+            
+ 
+        }
+
+        function review(idpro) {
 
             var idPro=idnih; 
             var namaPro=document.getElementById('namapro');  
