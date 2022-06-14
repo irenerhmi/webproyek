@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+
 <?php
 
 session_start();
@@ -8,16 +9,14 @@ if(!isset($_SESSION['pem_username'])){
 }
 require "../koneksidb.php";
 
-$username = $_SESSION['pem_username'];
-
-$idpro = $_GET['idpro'];
-$_SESSION['idrevs'] = $idpro;
+$id = $_GET['idart'];
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pembayaran - HaulHallyu Merch</title>
+    <title>News -HaulHallyu</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Martup is Multipurpose eCommerce HTML Template, that's perfect for any kind of eCommerce websites such as fashion, furniture and many more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,10 +56,10 @@ $_SESSION['idrevs'] = $idpro;
 
     <!-- .....:::::: Start Header Section - Dark Header :::::.... -->
     <?php require "header.php"; ?>
-    <!-- .....:::::: End Header Section - Dark Header :::::.... -->
+    <!-- ...:::: End Add Cart Offcanvas Section:::... -->
 
     <!-- ...::: Strat Breadcrumb Section :::... -->
-    <div class="breadcrumb-section">
+     <div class="breadcrumb-section">
         <div class="box-wrapper">
             <div class="breadcrumb-wrapper breadcrumb-wrapper--style-1 pos-relative">
                 <div class="breadcrumb-bg">
@@ -70,11 +69,11 @@ $_SESSION['idrevs'] = $idpro;
                     <div class="breadcrumb-wrapper">
                         <div class="content">
                             <span class="title-tag">BEST DEAL FOREVER</span>
-                            <h2 class="title"><span class="text-mark">Rating dan Review</span> Page</h2>
+                            <h2 class="title"><span class="text-mark">News</span> Page</h2>
                         </div>
                         <ul class="breadcrumb-nav">
                             <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
-                            <li>Rating dan Review</li>
+                            <li>News</li>
                         </ul>
                     </div>
                 </div>
@@ -83,39 +82,72 @@ $_SESSION['idrevs'] = $idpro;
     </div>
     <!-- ...::: End Breadcrumb Section :::... -->
 
-    <!-- ...:::: Start Customer Payment Section :::... -->
-    <div class="customer-login section-fluid-270 section-top-gap-100">
-        <div class="container-fluid">
-            <div class="row">
-                <!--login area start-->
-                <div class="col-lg-6 col-md-6">
-                    <div class="account_form">
-                        <h3>Konfirmasi Pembayaran</h3>
-                        <form method="POST" >
-                            <div class="default-form-box">
-                                <label>Masukkan Rating (Range 1-5) </label>
-                                <input type="number" value="" min=1 max=5 name="rating" id="rating" placeholder="Masukkan Rating">
+    <!-- ...::: Strat Blog-List Section :::... -->
+    <div class="blog-list-section section-fluid-270 section-top-gap-100">
+        <div class="box-wrapper">
+            <div class="blog-list-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <!-- Start Section Wrapper -->
+                                    <div class="section-wrapper">
+                                        <div class="section-content section-content-gap-60">
+                                            <h2 class="section-title fw-bold">News</h2>
+                                            <p>Artikel terkini seputar industri hiburan K-pop.</p>
+                                        </div>
+                                    </div>
+                                    <!-- End Section Wrapper -->
+                                </div>
                             </div>
-                            <div class="default-form-box">
-                                <label>Masukkan Review</label>
-                                <input type="text" value="" name="isirev" id="review" placeholder="Masukkan Review" >
+                            <!-- Start Blog List Wrapper -->
+                            <?php
+                            $sql = "select * from artikel where id_artikel='".$id."'";
+
+                            $result = mysqli_query($conn,$sql);
+
+                            $row = mysqli_fetch_array($result);
+                            ?>
+                            <div class="blog-list-wrapper">
+                                <div class="blog-list-single-item">
+                                    <a href="blog-details-full-width.html" class="image img-responsive">
+                                        <img src="../image/artikel/<?php echo $row['imageart'];?>" width="435px" height="350px" alt="">
+                                    </a>
+                                    <div class="post-meta">
+                                        <a href="#" class="catagory">K-pop</a>
+                                        <a href="#" class="date"><?php echo $row['tanggal']; ?></a>
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title"><a href="blog-details-full-width.html"><?php echo $row['nama_art']; ?></a></h4>
+                                    </div>
+                                    <a href="#" class="author"><?php echo $row['penulis']; ?></a>
+                                    <br>
+                                    <br>
+
+                                    <div class="content">
+                                        <p> <?php echo $row['isiart']; ?></p>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="login_submit">
-                                <A class="btn btn-sm btn-radius btn-default" onclick="review(<?php echo $_SESSION['idrevs']?>)" name="submit">Kirim</A>
-                            </div>
-                        </form>
+                            <!-- End Blog List Wrapper -->
+
+                            <!-- Start Pagination -->
+                            <!-- End Pagination -->
+                        </div>
                     </div>
                 </div>
-                <!--login area start-->
-
-                <!--register area start-->
-                <!--register area end-->
             </div>
         </div>
-    </div> <!-- ...:::: End Customer Payment Section :::... -->
+    </div>
+    <!-- ...::: End Blog-List Section :::... -->
+
+    <!-- ...::: Strat Subscribe Section :::... -->
+    <!-- ...::: End Subscribe Section :::... -->
 
     <!-- ...::: Strat Footer Section - Footer Dark :::... -->
-    <?php require "footer.php"; ?>
+    <?php require "footer.php";?>
     <!-- ...::: End Footer Section Section - Footer Dark :::... -->
 
     <!-- Scroll To button -->
@@ -143,103 +175,6 @@ $_SESSION['idrevs'] = $idpro;
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <!-- <script src="assets/js/main.min.js"></script> -->
-    <script>
-        function delwish(idnih) {
-
-            var idPro=idnih; 
- 
-            if(idPro=='') {
-                alert("Please fill all fields.");
-                return false;
-                console.log('kosong');
-            } else {
-                console.log(idPro);
-            }
- 
-            $.ajax({
-                type: "POST",
-                url: "hapuswish.php",
-                data: {
-                    idPro: idnih
-                },
-                cache: false,
-                success: function(data) {
-                    alert(data);
-                }
-            });
-                 
-        location.reload();
- 
-        }
-
-        function sukcart(idnih) {
-
-            var idPro=idnih; 
-            var namaPro=document.getElementById('namapro');  
-            var qtyPro=document.getElementById('qtypro');   
-            var message=document.getElementById('message'); 
- 
-            if(idPro==''||namaPro==''||qtyPro=='') {
-                alert("Please fill all fields.");
-                return false;
-                console.log('kosong');
-            } else {
-                console.log(idPro);
-            }
- 
-            $.ajax({
-                type: "POST",
-                url: "add-cart.php",
-                data: {
-                    idPro: idnih,
-                    namaPro: namaPro.value,
-                    qtyPro: qtyPro.value
-                },
-                cache: false,
-                success: function(data) {
-                    alert(data);
-                }
-
-            });
-
-        location.reload();
- 
-        }
-
-        function review(idnih) {
-
-            var idPro=idnih; 
-            var review=document.getElementById('review');  
-            var rating=document.getElementById('rating');
- 
-            if(review==''||rating=='') {
-                alert("Please fill all fields.");
-                return false;
-                console.log('kosong');
-            } else {
-                console.log(idPro);
-            }
- 
-            $.ajax({
-                type: "POST",
-                url: "add-rev.php",
-                data: {
-                    idPro: idnih,
-                    review: review.value,
-                    rating: rating.value
-                },
-                cache: false,
-                success: function(data) {
-                    alert(data);
-                    console.log('tidak masuk');
-                }
-
-            });
-            
-        window.history.back();
- 
-        }
-    </script>
 
 </body>
 

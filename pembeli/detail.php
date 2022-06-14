@@ -150,6 +150,16 @@ $idtrans = $_GET['id'];
                                         <tbody>
                                             <tr>
                                                 <td>
+                                                    Jenis Pembayaran
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    echo $rowtr['jenispem']; ?> 
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
                                                     SubTotal
                                                 </td>
                                                 <td>
@@ -168,6 +178,32 @@ $idtrans = $_GET['id'];
                                                     
                                                 </td>
                                             </tr>
+                                            <?php 
+                                            if ($rowtr['jenispem'] === 'DP'){
+                                                $totalakhir = $total+$jumong;
+                                                
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    DP 50%
+                                                </td>
+                                                <td> Rp. 
+                                                    <?php echo number_format($totalakhir-($totalakhir*50/100)); ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong> Total Pembayaran </strong>
+                                                </td>
+                                                <td>
+                                                    <strong> Rp. <?php 
+                                                    echo number_format($totalakhir-($totalakhir*50/100)); ?> 
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            } else {
+                                            ?>
                                             <tr>
                                                 <td>
                                                     <strong> Total Pembayaran </strong>
@@ -178,7 +214,9 @@ $idtrans = $_GET['id'];
                                                     </strong>
                                                 </td>
                                             </tr>
-                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>

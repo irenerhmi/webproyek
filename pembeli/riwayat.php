@@ -109,6 +109,7 @@ require "../koneksidb.php";
                                                 <th>Tgl Transaksi</th>
                                                 <th>Status</th>
                                                 <th>Detail</th>
+                                                <th>Jenis Pembayaran</th>
                                                 <th>Total</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -126,7 +127,20 @@ require "../koneksidb.php";
                                                 <td><?php echo $perproduk['tgl_transaksi']; ?></td>
                                                 <td><span class="success"><?php echo $perproduk['status_trans']; ?></span></td>
                                                 <td><a href="notaj.php?id=<?php echo $perproduk['id_transaksi']; ?>" name="nota">Lihat Detail Pesanan</a></td>
-                                                <td>Rp. <?php echo number_format($perproduk['total_trans']); ?></td>
+                                                <td><?php echo $perproduk['jenispem']; ?></td>
+                                                <td> Rp. 
+                                                    <?php 
+                                                    if ($perproduk['jenispem'] === 'DP'){
+                                                        $totalakhir = $perproduk['total_trans']-($perproduk['total_trans']*50/100);
+                                                        echo number_format($totalakhir); ?>
+
+                                                    <?php
+                                                    } else {
+                                                        echo number_format($perproduk['total_trans']); 
+                                                    }
+                                                    ?>
+                                                        
+                                                </td>
                                                 <td>
                                                     <a href="bayar.php?id=<?php echo $perproduk['id_transaksi']; ?>" class="btn btn-danger" name="bayar">Bayar</a><br><br>
                                                     <a href="batal.php?id=<?php echo $perproduk['id_transaksi']; ?>" class="btn btn-dark" name="batal">Batalkan</a>
@@ -143,7 +157,7 @@ require "../koneksidb.php";
                                 <!-- Tab Panes Pesanan Menunggu Konfirmasi -->
                                 <br>
                                 <br>
-                                <h4>Pesanan Menunggu Konfirmasi</h4>
+                                <h4>Pesanan Full Payment</h4>
                                 <div class="table_page table-responsive">
                                     <table>
                                         <thead>
@@ -159,8 +173,7 @@ require "../koneksidb.php";
                                             <?php 
                                             $nomor = 1;
                                             $idpel = $_SESSION['pem_username'];
-                                            $ambil = mysqli_query($conn, "SELECT * from transaksi where u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Konfirmasi' OR 
-                                                u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Pengiriman' "); 
+                                            $ambil = mysqli_query($conn, "SELECT * from transaksi where u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Konfirmasi' AND jenispem='Full Payment' OR u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Pengiriman' AND jenispem='Full Payment' "); 
                                             while($perproduk = mysqli_fetch_assoc($ambil)){
                                             ?>
                                             <tr>
@@ -168,7 +181,101 @@ require "../koneksidb.php";
                                                 <td><?php echo $perproduk['tgl_transaksi']; ?></td>
                                                 <td><span class="success"><?php echo $perproduk['status_trans']; ?></span></td>
                                                 <td><a href="detail.php?id=<?php echo $perproduk['id_transaksi']; ?>" name="nota">Lihat Detail Pesanan</a></td>
-                                                <td>Rp. <?php echo number_format($perproduk['total_trans']); ?></td>
+                                                <td>
+                                                    Rp. 
+                                                    <?php 
+                                                    if ($perproduk['jenispem'] === 'DP'){
+                                                        $totalakhir = $perproduk['total_trans']-($perproduk['total_trans']*50/100);
+                                                        echo number_format($totalakhir); ?>
+
+                                                    <?php
+                                                    } else {
+                                                        echo number_format($perproduk['total_trans']); 
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <?php 
+                                            $nomor++;
+                                            } 
+                                            ?>   
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Tab Panes Pesanan Menunggu Pelunasan -->
+                                <br>
+                                <br>
+                                <h4>Pesanan Pelunasan</h4>
+                                <div class="table_page table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Order</th>
+                                                <th>Tgl Transaksi</th>
+                                                <th>Status</th>
+                                                <th>Detail</th>
+                                                <th>Total</th>
+                                                <th>Batas Pelunasan</th>
+                                                <th>Pelunasan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $nomor = 1;
+                                            $idpel = $_SESSION['pem_username'];
+                                            $ambil = mysqli_query($conn, "SELECT * from transaksi where 
+                                                u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Pengiriman' AND jenispem='DP' OR u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Konfirmasi Pelunasan' AND jenispem='DP' OR u_username = '".$_SESSION['pem_username']."' AND status_trans='Menunggu Konfirmasi' AND jenispem='DP' "); 
+                                            while($perproduk = mysqli_fetch_assoc($ambil)){
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $nomor; ?></td>
+                                                <td><?php echo $perproduk['tgl_transaksi']; ?></td>
+                                                <td><span class="success"><?php echo $perproduk['status_trans']; ?></span></td>
+                                                <td><a href="detail.php?id=<?php echo $perproduk['id_transaksi']; ?>" name="nota">Lihat Detail Pesanan</a></td>
+                                                <td>
+                                                    Rp. 
+                                                    <?php 
+                                                    if ($perproduk['jenispem'] === 'DP'){
+                                                        $totalakhir = $perproduk['total_trans']-($perproduk['total_trans']*50/100);
+                                                        echo number_format($totalakhir); ?>
+
+                                                    <?php
+                                                    } else {
+                                                        echo number_format($perproduk['total_trans']); 
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+
+                                                    $sqlpem = mysqli_query($conn,"SELECT * from pembayaran where id_transaksi='".$perproduk['id_transaksi']."' ");
+                                                    $rowpem = mysqli_fetch_array($sqlpem);
+                                                    $tglpem = $rowpem['tgl_bayar'];
+
+                                                    $tgl2 = date('Y-m-d', strtotime('+30 days', strtotime($tglpem))); //operasi penjumlahan tanggal sebanyak 30 hari
+                                                    echo $tgl2; //print tanggal
+
+
+                                                    ?> 
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    if ($perproduk['status_trans'] === 'Menunggu Pengiriman'){
+                                                    ?>
+                                                        <a href="pelunasan.php?id=<?php echo $perproduk['id_transaksi']; ?>" class="btn btn-danger" name="bayar">Pelunasan</a>
+                                                    <?php
+                                                    } else if ($perproduk['status_trans'] === 'Menunggu Konfirmasi Pelunasan') {
+                                                    ?>
+                                                        <span class="success">Pelunasan Diproses</span>
+                                                    <?php
+                                                    } else if ($perproduk['status_trans'] === 'Menunggu Konfirmasi') {
+                                                    ?>
+                                                        <span class="success">Menunggu Konfirmasi Pembayaran DP</span>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </td>
                                             </tr>
                                             <?php 
                                             $nomor++;

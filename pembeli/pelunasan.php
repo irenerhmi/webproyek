@@ -10,14 +10,14 @@ require "../koneksidb.php";
 
 $username = $_SESSION['pem_username'];
 
-$idpro = $_GET['idpro'];
-$_SESSION['idrevs'] = $idpro;
+$idtrans = $_GET['id'];
+$_SESSION['cekbayar'] = $idtrans;
 
 ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pembayaran - HaulHallyu Merch</title>
+    <title>Pelunasan - HaulHallyu Merch</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Martup is Multipurpose eCommerce HTML Template, that's perfect for any kind of eCommerce websites such as fashion, furniture and many more.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,11 +70,11 @@ $_SESSION['idrevs'] = $idpro;
                     <div class="breadcrumb-wrapper">
                         <div class="content">
                             <span class="title-tag">BEST DEAL FOREVER</span>
-                            <h2 class="title"><span class="text-mark">Rating dan Review</span> Page</h2>
+                            <h2 class="title"><span class="text-mark">Pelunasan</span> Page</h2>
                         </div>
                         <ul class="breadcrumb-nav">
                             <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
-                            <li>Rating dan Review</li>
+                            <li>Pelunasan</li>
                         </ul>
                     </div>
                 </div>
@@ -90,18 +90,22 @@ $_SESSION['idrevs'] = $idpro;
                 <!--login area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form">
-                        <h3>Konfirmasi Pembayaran</h3>
-                        <form method="POST" >
+                        <h3>Konfirmasi Pelunasan</h3>
+                        <form action="cekpelunasan.php" method="POST" enctype="multipart/form-data" autocomplete="off">
                             <div class="default-form-box">
-                                <label>Masukkan Rating (Range 1-5) </label>
-                                <input type="number" value="" min=1 max=5 name="rating" id="rating" placeholder="Masukkan Rating">
+                                <label>Nama Rekening</label>
+                                <input name="barang" type="text" placeholder="Masukkan Nama Rekening">
                             </div>
                             <div class="default-form-box">
-                                <label>Masukkan Review</label>
-                                <input type="text" value="" name="isirev" id="review" placeholder="Masukkan Review" >
+                                <label>Nomor Rekening</label>
+                                <input name="berat" type="number" placeholder="Masukkan Nomor Rekening">
+                            </div>
+                            <div class="default-form-box">
+                                <label>Bukti Transfer</label>
+                                <input name="imgbukti" type="file" value="">
                             </div>
                             <div class="login_submit">
-                                <A class="btn btn-sm btn-radius btn-default" onclick="review(<?php echo $_SESSION['idrevs']?>)" name="submit">Kirim</A>
+                                <button class="btn btn-sm btn-radius btn-default" name="submit" type="submit" value="submit">Kirim</a></button>
                             </div>
                         </form>
                     </div>
@@ -203,40 +207,8 @@ $_SESSION['idrevs'] = $idpro;
             });
 
         location.reload();
- 
-        }
-
-        function review(idnih) {
-
-            var idPro=idnih; 
-            var review=document.getElementById('review');  
-            var rating=document.getElementById('rating');
- 
-            if(review==''||rating=='') {
-                alert("Please fill all fields.");
-                return false;
-                console.log('kosong');
-            } else {
-                console.log(idPro);
-            }
- 
-            $.ajax({
-                type: "POST",
-                url: "add-rev.php",
-                data: {
-                    idPro: idnih,
-                    review: review.value,
-                    rating: rating.value
-                },
-                cache: false,
-                success: function(data) {
-                    alert(data);
-                    console.log('tidak masuk');
-                }
-
-            });
+                 
             
-        window.history.back();
  
         }
     </script>

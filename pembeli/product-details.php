@@ -158,6 +158,7 @@ $id = $_GET['id'];
                         </div>
                         <div class="col-xxl-4 col-lg-6">
                             <!-- Start Product Content -->
+                            
                             <div class="product-content">
                                 <span class="catagory">Album</span>
                                 <h2 class="title"><?php echo $tnamapro; ?></h2>
@@ -264,7 +265,7 @@ $id = $_GET['id'];
                         <div class="col-xxl-4 col-lg-5 col-md-6 col-sm-8 col-auto me-5">
                             <div class="section-content">
                                 <h2 class="section-title">Related Products</h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <p></p>
                             </div>
                         </div>
                         <div class="col-auto">

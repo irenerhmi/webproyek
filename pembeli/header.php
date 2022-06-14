@@ -40,9 +40,6 @@
                                         </div>
                                     </li>
                                     <li class="menu-items">
-                                        <a href="blog-list-left-sidebar.html">News</a>
-                                    </li>
-                                    <li class="menu-items">
                                         <a href="#">Profile <span class="material-icons">arrow_right</span></a>
                                         <div class="has-dropdown">
                                             <div class="menu-content">
@@ -54,6 +51,7 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <li class="menu-items"><a href="list-news.php">News</a></li>
                                     <li class="menu-items"><a href="aboutus.php">About Us</a></li>
                                 </ul>
                             </div>

@@ -373,11 +373,11 @@
                     <div class="breadcrumb-wrapper">
                         <div class="content">
                             <span class="title-tag">BEST DEAL FOREVER</span>
-                            <h2 class="title"><span class="text-mark">Login</span> Page</h2>
+                            <h2 class="title"><span class="text-mark"> Register</span> Page</h2>
                         </div>
                         <ul class="breadcrumb-nav">
                             <li><a href="shop-grid-sidebar-left.html">Shop</a></li>
-                            <li>Login</li>
+                            <li>Register</li>
                         </ul>
                     </div>
                 </div>

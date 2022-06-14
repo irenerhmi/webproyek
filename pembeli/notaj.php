@@ -133,7 +133,7 @@ $idtrans = $_GET['id'];
                             <br>
                             <?php 
                                 //query ambil ongkir
-                                $resultr = mysqli_query($conn,"SELECT * from transaksi where id_transaksi='".$_SESSION['idtransbaru']."'");
+                                $resultr = mysqli_query($conn,"SELECT * from transaksi where id_transaksi='".$idtrans."'");
                                 $rowtr = mysqli_fetch_array($resultr);
                                 $jumong = $rowtr['tarif'];                                        
                             ?>
@@ -149,6 +149,16 @@ $idtrans = $_GET['id'];
                                             </tr>
                                         </thead> <!-- End Cart Table Head -->
                                         <tbody>
+                                            <tr>
+                                                <td>
+                                                    Jenis Pembayaran
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    echo $rowtr['jenispem']; ?> 
+                                                    
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     SubTotal
@@ -169,6 +179,32 @@ $idtrans = $_GET['id'];
                                                     
                                                 </td>
                                             </tr>
+                                            <?php 
+                                            if ($rowtr['jenispem'] === 'DP'){
+                                                $totalakhir = $total+$jumong;
+                                                
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    DP 50%
+                                                </td>
+                                                <td> Rp. 
+                                                    <?php echo number_format($totalakhir-($totalakhir*50/100)); ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong> Total Pembayaran </strong>
+                                                </td>
+                                                <td>
+                                                    <strong> Rp. <?php 
+                                                    echo number_format($totalakhir-($totalakhir*50/100)); ?> 
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            } else {
+                                            ?>
                                             <tr>
                                                 <td>
                                                     <strong> Total Pembayaran </strong>
@@ -179,7 +215,9 @@ $idtrans = $_GET['id'];
                                                     </strong>
                                                 </td>
                                             </tr>
-                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>

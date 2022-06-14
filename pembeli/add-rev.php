@@ -13,15 +13,14 @@ session_start();
 
     if ($resultrt === TRUE) {
         
-        $sql1 = "UPDATE transaksi SET status_trans = 'Pesanan Selesai' WHERE id_transaksi = '".$_SESSION['idtransrev']."'";
+        $sql1 = "UPDATE transaksi SET status_trans = 'Pesanan Selesai' WHERE id_transaksi = '".$_SESSION['idtransrevs']."'";
 
         $resulty = mysqli_query($conn,$sql1);
 
         if ($resulty === TRUE) {
 
-          echo "<script>
-                window.alert('Review telah diupload');
-              </script>";
+            echo 'Review berhasil dimasukkan!';
+
         } else {
 
           echo $sql1;

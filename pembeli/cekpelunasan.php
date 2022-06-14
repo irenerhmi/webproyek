@@ -45,15 +45,19 @@ if (isset($_POST['submit'])) {
   } else {
     if (move_uploaded_file($imgbukti["tmp_name"], $target_file)) {
       echo $idtrans;
-      
+
+      $resultrans = mysqli_query($conn,"SELECT * from transaksi where id_transaksi='$idtrans'");
+      $rowtrans = mysqli_fetch_array($resultrans);
+      $total = $rowtrans['total_trans'];
+
       $resultr = mysqli_query($conn,"SELECT * from pembayaran where id_transaksi='$idtrans'");
       $rowm = mysqli_fetch_array($resultr);
       $idmet = $rowm['id_bayar'];
 
-      $sql = "UPDATE pembayaran  SET status_bayar='Menunggu Konfirmasi', bukti_bayar='" .$namafile. "',tgl_bayar='" .$tgl_bayar. "' WHERE id_bayar='$idmet' ";
+      $sql = "UPDATE pembayaran  SET status_bayar='Menunggu Konfirmasi', bukti_bayar='" .$namafile. "', jml_bayar='".$total."' ,tgl_bayar='" .$tgl_bayar. "' WHERE id_bayar='$idmet' ";
 
       if (mysqli_query($conn, $sql) === TRUE) {
-        $resultd = mysqli_query($conn, "UPDATE transaksi SET status_trans='Menunggu Konfirmasi' WHERE id_transaksi='$idtrans'") ;
+        $resultd = mysqli_query($conn, "UPDATE transaksi SET status_trans='Menunggu Konfirmasi Pelunasan' WHERE id_transaksi='$idtrans'") ;
         echo "<script>
                 window.alert('Bukti pembayaran berhasil diupload!'); 
                 window.location ='riwayat.php'; 

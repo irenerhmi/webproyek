@@ -137,6 +137,13 @@ $idtrans = $_SESSION['idtransbaru'];
                             ?>
                         </div>
                         <div class="table_desc">
+                            <?php
+                            //query select pembayaran buat ambil metode
+                            $resultr = mysqli_query($conn,"SELECT * from pembayaran where id_transaksi='".$_SESSION['idtransbaru']."'");
+                            $rowm = mysqli_fetch_array($resultr);
+                            $idmet = $rowm['id_metode'];
+
+                            ?>
                             <h3>Tagihan</h3>
                                 <div class="table_page table-responsive">
                                     <table>
@@ -147,6 +154,16 @@ $idtrans = $_SESSION['idtransbaru'];
                                             </tr>
                                         </thead> <!-- End Cart Table Head -->
                                         <tbody>
+                                            <tr>
+                                                <td>
+                                                    Jenis Pembayaran
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    echo $rowtr['jenispem']; ?> 
+                                                    
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     SubTotal
@@ -167,6 +184,33 @@ $idtrans = $_SESSION['idtransbaru'];
                                                     
                                                 </td>
                                             </tr>
+                                    
+                                            <?php 
+                                            if ($rowtr['jenispem'] === 'DP'){
+                                                $totalakhir = $total+$jumong;
+                                                
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    DP 50%
+                                                </td>
+                                                <td> Rp. 
+                                                    <?php echo number_format($totalakhir-($totalakhir*50/100)); ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong> Total Pembayaran </strong>
+                                                </td>
+                                                <td>
+                                                    <strong> Rp. <?php 
+                                                    echo number_format($totalakhir-($totalakhir*50/100)); ?> 
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            } else {
+                                            ?>
                                             <tr>
                                                 <td>
                                                     <strong> Total Pembayaran </strong>
@@ -177,7 +221,9 @@ $idtrans = $_SESSION['idtransbaru'];
                                                     </strong>
                                                 </td>
                                             </tr>
-                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -185,12 +231,7 @@ $idtrans = $_SESSION['idtransbaru'];
                         <div class="card-text m-3">
                         <br>
                         <h3>Pembayaran </h3>
-                            <?php 
-                                //query select pembayaran buat ambil metode
-                                $resultr = mysqli_query($conn,"SELECT * from pembayaran where id_transaksi='".$_SESSION['idtransbaru']."'");
-                                $rowm = mysqli_fetch_array($resultr);
-                                $idmet = $rowm['id_metode'];
-                    
+                            <?php                     
                                 //query select metode bayar
                                 $resulme = mysqli_query($conn,"SELECT * from metode_bayar where id_metode='$idmet'");
                                 $rowb = mysqli_fetch_array($resulme);

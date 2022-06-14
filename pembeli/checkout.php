@@ -182,19 +182,19 @@ $username = $_SESSION['pem_username'];
                                             <input type="text" name="alamatpeng" value="<?php echo $alamat; ?>">
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <!--<div class="col-12">
                                         <div class="default-form-box">
                                             <label>Provinsi </label>
                                             <select class="form-control" id="nama_provinsi" name="nama_provinsi">
                                                 <option>-- Pilih Provinsi--</option>
                                                 <?php
-                                                    foreach ($data->rajaongkir->results as $provinsi) {
+                                                    /*foreach ($data->rajaongkir->results as $provinsi) {
                                                         echo '<option>-- '.$provinsi->province.'--</option>';
-                                                    }
+                                                    }*/
                                                 ?>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col-12 mt-3">
                                         <div class="order-notes">
                                             <label for="order_note">Order Notes</label>
@@ -292,6 +292,19 @@ $username = $_SESSION['pem_username'];
                                             </select>
                                         <br>
                                     </div>
+                                    <div class="default-form-box">
+                                        <br> <label>Jenis Pembayaran </label>
+                                            <select name="jenispem" class="form-control">
+                                                <option value="">Pilih Jenis Pembayaran</option>          
+                                                <option value="Full Payment">
+                                                    Full Payment
+                                                </option>
+                                                <option value="DP">
+                                                    DP
+                                                </option>
+                                            </select>
+                                        <br>
+                                    </div>
                                 <div class="payment_method">
                                     <div class="order_button"><br>
                                         <button class="btn btn-sm btn-radius btn-default" name="checkout">Proceed to Payment</button>
@@ -310,13 +323,15 @@ $username = $_SESSION['pem_username'];
                                 $ongkir = $_POST['ongkir'];
                                 $metode = $_POST['id_metode'];
                                 $namaeks = $_POST['ekspedisi'];
+                                $jenispem = $_POST['jenispem'];
                                 $tanggal_trans =  date("Y-m-d");
 
                                 $totaltrans = 0;
                                 $totaltrans = $total + $ongkir;
+                                $totaldp = $totaltrans - ($totaltrans*50/100);
 
                                 //menyimpan data ke table transaski
-                                $resulttr = mysqli_query($conn,"INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "', '" . $id_pelanggan . "')");
+                                $resulttr = mysqli_query($conn,"INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, jenispem, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "','" . $jenispem . "', '" . $id_pelanggan . "')");
 
                                 /*$sql = "INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "', '" . $id_pelanggan . "')";
 
@@ -367,10 +382,17 @@ $username = $_SESSION['pem_username'];
                                 };
 
                                 // menyimpan data ke table pembayaran
-                                $resultpb = mysqli_query($conn,"INSERT INTO pembayaran (jml_bayar, id_metode, id_transaksi) VALUES ('" . $totaltrans . "','" . $metode . "','" . $id_baru . "')");
+                                if($_POST['jenispem' === 'Full Payment']){
+                                    $resultpb = mysqli_query($conn,"INSERT INTO pembayaran (jml_bayar, id_metode, id_transaksi) VALUES ('" . $totaltrans . "','" . $metode . "','" . $id_baru . "')");
 
-                                $id_bayarbar = mysqli_insert_id($conn); 
-                                $_SESSION['idtbayarbar'] = $id_bayarbar;
+                                    $id_bayarbar = mysqli_insert_id($conn); 
+                                    $_SESSION['idtbayarbar'] = $id_bayarbar;
+                                }else {
+                                    $resultpb = mysqli_query($conn,"INSERT INTO pembayaran (jml_bayar, id_metode, id_transaksi) VALUES ('" . $totaldp . "','" . $metode . "','" . $id_baru . "')");
+
+                                    $id_bayarbar = mysqli_insert_id($conn); 
+                                    $_SESSION['idtbayarbar'] = $id_bayarbar;
+                                };
 
                                 // menyimpan data ke table pengiriman
                                 $resultpb = mysqli_query($conn,"INSERT INTO pengiriman (nama_ekspedisi, status_peng, alamatpeng, id_bayar) VALUES ('" . $namaeks . "','Belum Dikirim', '" . $alamat . "' , '" . $id_bayarbar . "')");
