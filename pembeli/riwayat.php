@@ -330,7 +330,8 @@ require "../koneksidb.php";
                                                 <td><?php echo $ekspedisi; ?><br><?php echo $idkir; ?></td>
                                                 <td>Rp. <?php echo number_format($perproduk['total_trans']); ?></td>
                                                 <td>
-                                                    <a href="https://www.cekresi.com" class="btn btn-danger" name="diterima">Lacak</a><br>
+                                                    <!--<a href="https://cekresi.com/" class="btn btn-danger" name="diterima">Lacak</a>-->
+                                                    <a href="resi.php" class="btn btn-danger" name="diterima">Lacak</a><br>
                                                     <a href="diterima.php?id=<?php echo $perproduk['id_transaksi']; ?>" class="btn btn-dark" name="diterima">Diterima</a>
                                                 </td>
                                             </tr>

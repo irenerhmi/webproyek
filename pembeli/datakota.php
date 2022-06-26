@@ -1,9 +1,11 @@
 <?php
 
+$id = $_GET['prov'];
+
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?id=39&province=5",
+  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=".$id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -23,7 +25,13 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+  $data = json_decode($response, TRUE);
+
+  //echo "<pre>"; print_r($data); echo "</pre>";
+
+  for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {  
+      echo "<option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."</option>"; 
+  }
 }
 
 

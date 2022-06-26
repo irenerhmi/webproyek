@@ -1,3 +1,41 @@
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "key: 2a1b137f79d11bfed6a2b885b884495b"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  //echo $response;
+  // Hasilnya dalam bentuk json
+  // kita koversi ke array
+  $data = json_decode($response, TRUE);
+
+  //echo "<pre>"; print_r($data); echo "</pre>";
+
+  //kita mau ambil yg didalem result jadi masuk dlu ke rajaongkir baru ke result
+  $dataprovinsi = $data['rajaongkir']['results'];
+  
+}
+
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 <?php
@@ -170,6 +208,8 @@ $username = $_SESSION['pem_username'];
                                             <input type="number" value="<?php echo $nomor; ?>">
                                         </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                    </div>
                                     <div class="col-12">
                                         <div class="default-form-box">
                                             <label>Tempat </label>
@@ -178,23 +218,35 @@ $username = $_SESSION['pem_username'];
                                     </div>
                                     <div class="col-12">
                                         <div class="default-form-box">
+                                            <label>Provinsi </label>
+                                            <select style="width:100%">
+                                                <option value=''> ---------------Pilih provinsi---------------  </option>
+                                                <?php
+                                                    foreach($dataprovinsi as $key => $tiap_provinsi){
+                                                        echo "      <option value='".$tiap_provinsi['province_id']."' id_provinsi='".$tiap_provinsi['province_id']."'>";
+                                                        echo  "      "  . $tiap_provinsi['province'];
+                                                        echo "      </option>";
+
+                                                    };
+
+                                                ?>
+                                                <br>
+                                            </select>                                            
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            
+                                            
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <br>
                                             <label>Alamat </label>
                                             <input type="text" name="alamatpeng" value="<?php echo $alamat; ?>">
                                         </div>
                                     </div>
-                                    <!--<div class="col-12">
-                                        <div class="default-form-box">
-                                            <label>Provinsi </label>
-                                            <select class="form-control" id="nama_provinsi" name="nama_provinsi">
-                                                <option>-- Pilih Provinsi--</option>
-                                                <?php
-                                                    /*foreach ($data->rajaongkir->results as $provinsi) {
-                                                        echo '<option>-- '.$provinsi->province.'--</option>';
-                                                    }*/
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>-->
                                     <div class="col-12 mt-3">
                                         <div class="order-notes">
                                             <label for="order_note">Order Notes</label>
@@ -305,6 +357,7 @@ $username = $_SESSION['pem_username'];
                                             </select>
                                         <br>
                                     </div>
+                                </div>
                                 <div class="payment_method">
                                     <div class="order_button"><br>
                                         <button class="btn btn-sm btn-radius btn-default" name="checkout">Proceed to Payment</button>
@@ -333,7 +386,7 @@ $username = $_SESSION['pem_username'];
                                 //menyimpan data ke table transaski
                                 $resulttr = mysqli_query($conn,"INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, jenispem, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "','" . $jenispem . "', '" . $id_pelanggan . "')");
 
-                                /*$sql = "INSERT INTO transaksi (tgl_transaksi, status_trans, tarif, total_trans, u_username) VALUES ('" . $tanggal_trans . "', 'Menunggu Pembayaran', '" . $ongkir . "', '" . $totaltrans . "', '" . $id_pelanggan . "')";
+                                /*
 
                                 if ($conn->query($sql) === TRUE) {
                                     echo "berhasil";
@@ -435,22 +488,36 @@ $username = $_SESSION['pem_username'];
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <script>
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             $('#provinsi').change(function(){
             //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
             var prov = $('#provinsi').val();
                   $.ajax({
-                    type: 'GET',
-                    url: 'dataprovinsi.php',
-                    data :  'prov_id=' + prov,
-                    success: function(hasil_provinsi){
-                      alert('berhasil');
-                    },
-                    error: function(xhr, status, error) {
-                        alert('gagal');
+                    type: "GET",
+                    dataType: "php",
+                    url: "dataprovinsi.php",
+                    success: function(msg){
+                      $("select#provinsi").html(msg);                                                     
                     }
                   });
             });
+        });*/
+        $(document).ready(function(){
+                $.ajax({
+                    method: "post",
+                    url: "dataprovinsi.php",
+                    success: function(hasil_provinsi){
+                        console.log(hasil_provinsi);
+                        var ayam = "<option value=''>-Pilih provinsi--</option>";
+                        var asin = $(hasil_provinsi);
+                        var optionText = 'Premium';
+                        var optionValue = 'premium';
+                        $("#nama_provinsi").append('<option value="${optionValue}">${optionText}</option>');  
+                        //alert(hasil_provinsi);
+                    }
+                });
+            
+            
         });
     </script>
 

@@ -193,6 +193,7 @@ $id = $_GET['id'];
                                             <input type="hidden" name="qtypro" id="qtypro" value=1>
                                             <input type="hidden" name="stokpro" id="stokpro" value="
                                             <?php 
+                                                $stok = $row['stok'];
 
                                                 if($stok>0){
                                                     echo "Produk Tersedia";

@@ -84,12 +84,18 @@
                                 <h5 class="title">Kategori</h5>
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-1">Product</h5>
                                 <div id="dividerId-1" class="widget-collapse-body collapse">
+                                    <?php
+                                    $ambil = mysqli_query($conn, "SELECT * from kategori WHERE k_flag=1");
+                                    while($pecah = mysqli_fetch_assoc($ambil)){
+                                    ?>
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Album</a></li>
-                                        <li><a href="contact.html">Lightstick</a></li>
-                                        <li><a href="contact.html">Clothes</a></li>
-                                        <li><a href="contact.html">Unofficial Merchandise</a></li>
+                                        <li>
+                                            <a href="hal-produk-kat.php?id=<?php echo $pecah['id_kategori']; ?>"><?php echo $pecah['nama_kat']; ?></a>
+                                        </li>
                                     </ul>
+                                    <?php 
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <!-- End Footer Widget Single Item -->
@@ -99,8 +105,7 @@
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-2">Offer</h5>
                                 <div id="dividerId-2" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">Informasi K-pop Group</a></li>
-                                        <li><a href="contact.html">Topik Terkini</a></li>
+                                        <li><a href="list-news.php">Informasi K-pop Group</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,9 +116,9 @@
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-3">Information</h5>
                                 <div id="dividerId-3" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">My Profile</a></li>
-                                        <li><a href="contact.html">Riwayat Pesanan</a></li>
-                                        <li><a href="contact.html">Log Out</a></li>
+                                        <li><a href="my-account.php">My Profile</a></li>
+                                        <li><a href="riwayat.php">Riwayat Pesanan</a></li>
+                                        <li><a href="logout.php">Log Out</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -124,8 +129,7 @@
                                 <h5 class="collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-4">About</h5>
                                 <div id="dividerId-4" class="widget-collapse-body collapse">
                                     <ul class="footer-nav">
-                                        <li><a href="contact.html">About HaulHallyu</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="aboutus.php">About HaulHallyu</a></li>
                                     </ul>
                                 </div>
                             </div>
