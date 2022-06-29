@@ -34,7 +34,6 @@ if ($err) {
   $dataprovinsi = $data['rajaongkir']['results'];
   
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -219,7 +218,7 @@ $username = $_SESSION['pem_username'];
                                     <div class="col-12">
                                         <div class="default-form-box">
                                             <label>Provinsi </label>
-                                            <select style="width:100%">
+                                            <select name="nama_provinsi" style="width:100%">
                                                 <option value=''> ---------------Pilih provinsi---------------  </option>
                                                 <?php
                                                     foreach($dataprovinsi as $key => $tiap_provinsi){
@@ -232,6 +231,24 @@ $username = $_SESSION['pem_username'];
                                                 ?>
                                                 <br>
                                             </select>                                            
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="default-form-box">
+                                            <label>Kota </label>
+                                            <select name="datakota">
+                                                <option value=''> ---------------Pilih kota---------------  </option>
+                                                <div> 
+
+                                                </div>
+                                            </select>
+                                                
+                                            </div>
+                                            <!--<select name="nama_distrik" style="width:100%">
+                                                <option value=''> ---------------Pilih kota---------------  </option>
+                                                
+                                                <br>
+                                            </select> -->                                           
                                         </div>                                        
                                     </div>
                                     <div class="col-12">
@@ -488,6 +505,20 @@ $username = $_SESSION['pem_username'];
     <!--Main JS (Common Activation Codes)-->
     <script src="assets/js/main.js"></script>
     <script>
+        $("select[name=nama_provinsi]").on("change", function(){
+            // Ambil id_provinsi ynag dipilih (dari atribut pribadi)
+            var id_provinsi_terpilih = $("option:selected", this).attr("id_provinsi");
+            $.ajax({
+              type: 'post',
+              url: 'datakota.php',
+              data: 'id_provinsi='+id_provinsi_terpilih,
+              success:function(hasil_distrik){
+                console.log(hasil_distrik);
+                $("div[name=datakota]").html(hasil_distrik);
+              }
+            })
+          });
+
         /*$(document).ready(function(){
             $('#provinsi').change(function(){
             //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax

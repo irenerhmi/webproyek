@@ -9,6 +9,7 @@ if(!isset($_SESSION['pem_username'])){
 require "../koneksidb.php";
 
 $username = $_SESSION['pem_username'];
+$_SESSION['idtr'] = $_GET['idtrans'];
 
 ?>
 <head>
@@ -92,10 +93,23 @@ $username = $_SESSION['pem_username'];
                             <div class="login">
                                 <div class="login_form_container">
                                     <div class="account_login_form">
-                                        <form method="POST" id="formku2">
+                                        <?php
+                                        $sql = "select * from pembayaran where id_transaksi = '".$_SESSION['idtr']."' ";
+                                        $result = mysqli_query($conn, $sql);
+                                        $row = mysqli_fetch_array($result);
+                                        $idbayar = $row['id_bayar'];
+
+                                        $sql2 = "select * from pengiriman where id_bayar = '".$idbayar."' ";
+                                        $result2 = mysqli_query($conn, $sql2);
+                                        $row2 = mysqli_fetch_array($result2);
+                                        $resi = $row2['buktipeng'];
+                                        $kurir = $row2['nama_ekspedisi'];
+
+                                        ?>
+                                        <form id="formku2">
                                             <div class="default-form-box mb-20">
                                                 <label>Nomor Resi</label>
-                                                <input type="text" name="noresi" placeholder="Masukkan Nomor Resi">
+                                                <input type="text" name="noresi" value="<?php echo $resi;?>" placeholder="Masukkan Nomor Resi">
                                             </div>
                                             <div class="default-form-box mb-20">
                                                 <label>Kurir</label>
@@ -104,7 +118,12 @@ $username = $_SESSION['pem_username'];
                                                         <option value="jne">JNE</option>
                                                         <option value="jnt">JNT</option>
                                                         <option value="sicepat">SiCepat</option>
+                                                        <option value="tiki">Tiki</option>
                                                         <option value="spx">Shopee Express</option>
+                                                        <option value="anteraja">Anter Aja</option>
+                                                        <option value="wahana">Wahana</option>
+                                                        <option value="jet">JET Express</option>
+                                                        <option value="ide">ID Express</option>
                                                 </select>
                                             </div>
                                             <div class="save_button mt-3">

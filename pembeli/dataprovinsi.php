@@ -11,7 +11,7 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
-    "key: 2a1b137f79d11bfed6a2b885b884495b"
+    "key: 04120c616d3c3cbd998de9d45f1d319c"
   ),
 ));
 

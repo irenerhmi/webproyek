@@ -3,7 +3,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['pem_username'])){
+if(($_SESSION['pem_username'] == ' '  OR $_SESSION['email'] == ' ')){
     header("location: login.php");
 }
 require "../koneksidb.php";

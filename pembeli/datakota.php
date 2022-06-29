@@ -1,6 +1,6 @@
 <?php
 
-$id = $_GET['prov'];
+$id = $_POST['id_provinsi'];
 
 $curl = curl_init();
 
@@ -13,7 +13,7 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
-    "key: 2a1b137f79d11bfed6a2b885b884495b"
+    "key: 04120c616d3c3cbd998de9d45f1d319c"
   ),
 ));
 
@@ -30,7 +30,10 @@ if ($err) {
   //echo "<pre>"; print_r($data); echo "</pre>";
 
   for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {  
-      echo "<option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."</option>"; 
+      echo "
+        <option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."
+        </option>
+      "; 
   }
 }
 
